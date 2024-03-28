@@ -1,5 +1,11 @@
 # Sistema de Gestión de Facturas Electrónicas
 
+## Integrantes
+
+- Anner Angulo Gutiérrez
+- Juan Pablo Cartín Esquivel
+- Ignacio Bonilla Rojas
+
 ## Descripción
 
 Este proyecto tiene como objetivo desarrollar un sistema web en Java para la gestión de facturas electrónicas, utilizando una base de datos MySQL para el almacenamiento de datos.
@@ -16,9 +22,3 @@ Este proyecto tiene como objetivo desarrollar un sistema web en Java para la ges
 - Aceptar solicitudes de registro de nuevos proveedores.
 - Listar los proveedores registrados.
 - Desactivar proveedores.
-
-## Integrantes
-
-- Anner Angulo Gutiérrez
-- Juan Pablo Cartín Esquivel
-- Ignacio Bonilla Rojas
