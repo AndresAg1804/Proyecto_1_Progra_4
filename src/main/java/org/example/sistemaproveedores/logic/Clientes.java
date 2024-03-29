@@ -7,9 +7,6 @@ import java.util.Objects;
 
 @Entity
 public class Clientes {
-
-    //haciendo pruebas123
-
     @Basic
     @Column(name = "nombreC")
     private String nombreC;
