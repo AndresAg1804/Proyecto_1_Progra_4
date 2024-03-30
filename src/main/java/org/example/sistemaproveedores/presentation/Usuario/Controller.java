@@ -38,8 +38,8 @@ public class Controller {
         if(u!=null){
             session.setAttribute("usuario",u);
             switch (u.getTipo()){
-                case "PRO":{return "redirect: /presentation/Facturar/show";}
-                case "ADM":{return "redirect: /presentation/Facturar/show";}
+                case "PRO":{return "redirect:/presentation/Usuarios/show";}
+                case "ADM":{return "redirect:/presentation/Facturar/show";}
                 default:{return "index";}
             }
         }
