@@ -1,0 +1,12 @@
+table {
+    display: block;
+    border-collapse: collapse;
+    width: 600px;
+    horiz-align: center;
+}
+
+table th,td{
+    padding:8px;
+    text-align:center;
+    border-bottom: 1px solid rgb(128, 128, 128);
+}

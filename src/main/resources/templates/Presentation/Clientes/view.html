@@ -1,57 +1,39 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Facturacion</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/Menu.css">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="../../../static/css/Menu.css">
+    <link rel="stylesheet" href="../../../static/css/style.css">
 </head>
 <body>
 <div class="header">
     <div>
         <div>
-            <p>Facturación </p> <p>electronica</p></div>
-        <div><img class="logo" src="../static/Images/logo.png" alt=""/></div>
+            <p>Facturación </p> <p>electronica</p></div> <div><img class="logo" src="../../../static/Images/logo.png"></div>
     </div>
-
-    <ul class="Menu">
-        <li>
-            <a href="/presentation/AcercaDe/show">Acerca De</a>
-        </li>
-        <li>
-            <a href="/presentation/Login/show">Login</a>
-        </li>
-        <li>
-            <a href="/presentation/Facturar/show">Prueba</a>
-        </li>
-
-        <li>
-            <a href="">All view's</a>
-            <ul>
-                <li><a href="" title="-">-></a></li>
-                <li><a href="/Presentatio/Usuarios/view" title="-">Usuarios</a></li>
-                <li><a href="/Presentatio/Clientes/view" title="-">Clientes</a></li>
-                <li><a href="/Presentation/Productos/view" title="-">Productos</a></li>
-                <li><a href="/Presentation/Facturas/view" title="-">Facturas</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-</div>
-    <table style="border: 4px solid blue">
-        <tr> <th>ID</th> <th>Nombre</th> <th>Precio</th> <th>...</th> </tr>
-        <tr th:each="p: ${Productos}">
-            <td th:text="${p.getIdPr()}"/>
-            <td th:text="${p.getNombreP()}"/>
-            <td th:text="${p.getPrecio()}"/>
-            <td><a th:href="@{/Presentation/Productos/view(idPr=${p.getIdPr()})}"></a></td>
-        </tr>
-    </table>
-
-<div>
-    <footer>
-        facturasOnline@best.team.com
-    </footer>
+    <div>
+        <ul class="Menu">
+            <li>
+                <a href="/presentation/AcercaDe/show">Acerca De</a>
+            </li>
+            <li>
+                <a href="/presentation/Facturar/show">Facturar</a>
+            </li>
+            <li>
+                <a href="/presentation/clientes/show">Clientes</a>
+            </li>
+            <li>
+                <a href="/presentation/Productos/show">Productos</a>
+            </li>
+            <li>
+                <a href="/presentation/Facturas/show">Facturas</a>
+            </li>
+            <li>
+                <a href="/presentation/Usuario/show">Usuario</a>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>
