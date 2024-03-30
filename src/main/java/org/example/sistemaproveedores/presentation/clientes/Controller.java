@@ -30,10 +30,10 @@ public class Controller {
     @ModelAttribute("proveedor")     public Proveedores proveedor() {return new Proveedores(); }
 
 
-    @GetMapping("/presentatio/Clientes/view")
+    @GetMapping("/presentation/Clientes/show")
     public String show(Model model) {
         model.addAttribute("clientes", service.clienteFindAll());
-        return "/Presentatio/Clientes/view";
+        return "/Presentation/Clientes/view";
     }
 
     @PostMapping("/presentation/Clientes/search")
