@@ -21,7 +21,7 @@ public class Controller {
     @GetMapping("/presentation/Usuarios/show")
     public String show(Model model){// index/menu->show all usuarios
         model.addAttribute("S_usuarios", service.usuariosFindAll());
-        return "/presentation/Usuarios/view";
+        return "/Presentation/Usuario/view";
     }
     @PostMapping("/Usuarios/newU")
     public String registrarUsuario(@RequestParam("usern") String usern,
