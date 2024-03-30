@@ -6,7 +6,6 @@ import java.util.Objects;
 
 @Entity
 public class Usuarios {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "usern")
     private String usern;
