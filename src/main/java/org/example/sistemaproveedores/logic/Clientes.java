@@ -11,6 +11,7 @@ public class Clientes {
     @Column(name = "nombreC")
     private String nombreC;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idC")
     private String idC;
