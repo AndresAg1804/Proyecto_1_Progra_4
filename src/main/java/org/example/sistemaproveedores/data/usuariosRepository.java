@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface usuariosRepository extends CrudRepository<Usuarios, String> {
-
+    Usuarios findByUsernAndPasw(String usern,String pasw);
 }

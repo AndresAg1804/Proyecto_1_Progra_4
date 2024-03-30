@@ -28,10 +28,10 @@
             <a href="">All view's</a>
             <ul>
                 <li><a href="" title="-">-></a></li>
-                <li><a href="/presentatio/Usuarios/view" title="-">Usuarios</a></li>
-                <li><a href="/presentatio/Clientes/view" title="-">Clientes</a></li>
-                <li><a href="/presentation/Productos/view" title="-">Productos</a></li>
-                <li><a href="/presentation/Facturas/view" title="-">Facturas</a></li>
+                <li><a href="/presentation/Usuarios/show" title="-">Usuarios</a></li>
+                <li><a href="/presentation/Clientes/show" title="-">Clientes</a></li>
+                <li><a href="/presentation/Productos/show" title="-">Productos</a></li>
+                <li><a href="/presentation/Facturas/show" title="-">Facturas</a></li>
             </ul>
         </li>
     </ul>
@@ -43,7 +43,7 @@
             <td th:text="${u.getUsern()}"/>
             <td th:text="${u.getPasw()}"/>
             <td th:text="${u.getTipo()}"/>
-            <td><a th:href="@{/presentatio/Usuarios/view(idPr=${u.getUsern()})}"></a></td>
+            <td><a th:href="@{/presentatio/Usuarios/view(usern=${u.getUsern()})}"></a></td>
         </tr>
     </table>
 </div>

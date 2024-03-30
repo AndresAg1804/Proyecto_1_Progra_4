@@ -1,6 +1,6 @@
 package org.example.sistemaproveedores.presentation.Usuario;
 
-import org.example.sistemaproveedores.logic.Proveedores;
+import jakarta.servlet.http.HttpSession;
 import org.example.sistemaproveedores.logic.Service;
 import org.example.sistemaproveedores.logic.Usuarios;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,10 @@ public class Controller {
     public String SENDnewU() {//index->newU
         return "/Presentation/Usuario/newU";
     }
-
-    @GetMapping("/presentatio/Usuarios/view")
+    @GetMapping("/presentation/Usuarios/show")
     public String show(Model model){// index/menu->show all usuarios
         model.addAttribute("S_usuarios", service.usuariosFindAll());
-        return "/Presentation/Usuario/viewU";
+        return "/presentation/Usuarios/view";
     }
     @PostMapping("/Usuarios/newU")
     public String registrarUsuario(@RequestParam("usern") String usern,
@@ -31,6 +30,22 @@ public class Controller {
                                    Model model) {
         service.addUsuario(usern,pasw,tipo);
         return "index";
+    }
+    @PostMapping("/login/login")
+    public String login(@RequestParam("usern") String usern,
+                     @RequestParam("pasw") String pasw, HttpSession session) {
+        Usuarios u=service.login(usern,pasw);
+        if(u!=null){
+            session.setAttribute("usuario",u);
+            switch (u.getTipo()){
+                case "PRO":{return "redirect: /presentation/Facturar/show";}
+                case "ADM":{return "redirect: /presentation/Facturar/show";}
+                default:{return "index";}
+            }
+        }
+        else{
+            return "redirect: index";
+        }
     }
 }
 

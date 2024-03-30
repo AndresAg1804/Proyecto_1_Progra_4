@@ -10,7 +10,7 @@ public class Controller {
     @Autowired
     private Service service;
 
-    @GetMapping("/presentation/Facturas/view")
+    @GetMapping("/presentation/Facturas/show")
     public String show(Model model) {
         model.addAttribute("facturas", service.facturasFindAll());
         return "/Presentation/Facturas/view";

@@ -10,7 +10,7 @@ public class Controller {
     @Autowired
     private Service service;
 
-    @GetMapping("/presentation/Productos/view")
+    @GetMapping("/presentation/Productos/show")
     public String show(Model model) {
         model.addAttribute("productos", service.proveedorFindAll());
         return "/Presentation/Productos/view";

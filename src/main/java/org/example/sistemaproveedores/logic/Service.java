@@ -56,6 +56,9 @@ public class Service {
     u.setTipo(tipo);
     usuarioRepository.save(u);
     }
+    public Usuarios login(String usern,String pasw){
+        return usuarioRepository.findByUsernAndPasw(usern,pasw);
+    }
 
 
     //Metodos para facturas
