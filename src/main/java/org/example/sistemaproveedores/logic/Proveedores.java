@@ -11,6 +11,7 @@ public class Proveedores {
     @Column(name = "nombreP")
     private String nombreP;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idP")
     private String idP;
@@ -21,6 +22,8 @@ public class Proveedores {
     private Collection<Clientes> clientesByIdP;
     @OneToMany(mappedBy = "proveedoresByIdProveedor")
     private Collection<Facturas> facturasByIdP;
+    @OneToMany(mappedBy = "proveedoresByIdprov")
+    private Collection<Usuarios> usuariosByIdP;
 
     public String getNombreP() {
         return nombreP;
@@ -73,5 +76,13 @@ public class Proveedores {
 
     public void setFacturasByIdP(Collection<Facturas> facturasByIdP) {
         this.facturasByIdP = facturasByIdP;
+    }
+
+    public Collection<Usuarios> getUsuariosByIdP() {
+        return usuariosByIdP;
+    }
+
+    public void setUsuariosByIdP(Collection<Usuarios> usuariosByIdP) {
+        this.usuariosByIdP = usuariosByIdP;
     }
 }
