@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.ArrayList;
 
-@org.springframework.stereotype.Controller("clientes")
+@org.springframework.stereotype.Controller("Clientes")
 @SessionAttributes({"clientes", "clienteSearch", "clienteEdit","proveedor"})
 
 public class Controller {
