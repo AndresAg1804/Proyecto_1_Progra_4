@@ -10,7 +10,7 @@ public class Proveedores {
     @Basic
     @Column(name = "nombreP")
     private String nombreP;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "idP")
     private String idP;

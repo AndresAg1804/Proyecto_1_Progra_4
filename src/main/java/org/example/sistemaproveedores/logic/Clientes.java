@@ -7,13 +7,10 @@ import java.util.Objects;
 
 @Entity
 public class Clientes {
-
-    //haciendo pruebas123
-
     @Basic
     @Column(name = "nombreC")
     private String nombreC;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "idC")
     private String idC;
