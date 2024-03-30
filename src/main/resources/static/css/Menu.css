@@ -37,6 +37,26 @@
 	ul.Menu li a:hover{
 		color:white;
 	}
+	/*JP adding a display on hover list*/
+   .Menu li ul {
+	   display: none;
+	   position: absolute;
+	   background: #c8d9ed;
+	   padding: 0px;
+	   top: 100%;
+	   left: 0;
+   }
+
+   .Menu li:hover ul {
+	   display: block;
+   }
+   .Menu li {
+	   position: relative;
+   }
+   .center{
+	   align-items: center;
+	   justify-content: center;
+   }
 	
 
 

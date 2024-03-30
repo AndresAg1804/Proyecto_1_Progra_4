@@ -15,15 +15,15 @@ public class Controller {
     private Service service;
     @ModelAttribute("usuarios") public Usuarios Usuario() {return new Usuarios(); }
     @GetMapping("/newU")
-    public String shownewU() {
-        return "Presentation/Usuario/newU";
+    public String SENDnewU() {//index->newU
+        return "/Presentation/Usuario/newU";
     }
 
-    @GetMapping("/presentation/Usuario/show")
-    public String show() {
-        return "Presentation/Usuario/view";
+    @GetMapping("/presentatio/Usuarios/view")
+    public String show(Model model){// index/menu->show all usuarios
+        model.addAttribute("S_usuarios", service.usuariosFindAll());
+        return "/Presentation/Usuario/viewU";
     }
-    //esto es para poder redireccionar al usuario a otra pagina HTML
     @PostMapping("/Usuarios/newU")
     public String registrarUsuario(@RequestParam("usern") String usern,
                                    @RequestParam("pasw") String pasw,

@@ -3,6 +3,7 @@ import jakarta.servlet.http.HttpSession;
 import org.example.sistemaproveedores.logic.Clientes;
 import org.example.sistemaproveedores.logic.Proveedores;
 import org.example.sistemaproveedores.logic.Service;
+import org.springframework.boot.Banner;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,13 +30,10 @@ public class Controller {
     @ModelAttribute("proveedor")     public Proveedores proveedor() {return new Proveedores(); }
 
 
-    @GetMapping("/presentation/clientes/show")
-    public String show(@ModelAttribute("proveedor") Proveedores proveedor, HttpSession httpSession, Model model){
-       if(httpSession.getAttribute("clientes")==null){
-           //model.addAttribute("clientes", service.clienteReadAll(proveedor));
-       int i=1;
-       }
-       return "Presentation/Clientes/view";
+    @GetMapping("/presentatio/Clientes/view")
+    public String show(Model model) {
+        model.addAttribute("clientes", service.clienteFindAll());
+        return "/Presentatio/Clientes/view";
     }
 
     @PostMapping("/presentation/Clientes/search")
