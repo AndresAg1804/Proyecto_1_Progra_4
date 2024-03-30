@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../static/css/Menu.css">
-    <link rel="stylesheet" href="../../../static/css/style.css">
+    <link rel="stylesheet" href="../../../static/css/styleHeaderFooter.css">
+    <link rel="stylesheet" href="../../../static/css/Table.css">
+    <link rel="stylesheet" href="../../../static/css/formTablas.css">
 
 
 </head>
@@ -39,16 +41,26 @@
         </ul>
     </div>
 </div>
-<form action="urldeaccion">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter Username">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter Password">
-        <button type="submit">Login</button>
-        <label>New with us?</label>
-        <label>Create your new acount today</label>
-        <label><a href="URL">CREATE NEW ACCOUNT</a></label>
+<form action="urldeaccion" id="Proveedor-Cliente">
+        <label>Facturar</label>
+        <label>Proveedor</label>
+        <p> poner get del session proveedor</p>
+        <label>Cliente:</label>
+        <p>poner get del session del cliente</p>
+        <input type="text" id="identificacionC" name="identificacionC" placeholder="Client ID">
+</form>
+<form id="tabla">
+        <div>
+
+            <table>
+                <tr> <th>Cant.</th> <th>Descripción</th> <th>Precio</th> <th>Monto</th> </tr>
+                <tr th:each="c:${Producto}"></tr>
+                <td th:text="${cantidadProducto}"></td>
+                <td th:text="${c.nombreP}"></td>
+                <td th:text="${c.precio}"></td>
+                <td th:text="${c.cantidadProducto * c.precio}"></td>
+            </table>
+        </div>
     </div>
 </form>
 
