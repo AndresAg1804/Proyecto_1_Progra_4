@@ -6,12 +6,16 @@ import java.util.Objects;
 
 @Entity
 public class Detalle {
+
     @Id
     @Column(name = "numD")
     private int numD;
     @Basic
     @Column(name = "cantidad")
     private Integer cantidad;
+    @Basic
+    @Column(name = "monto")
+    private Integer monto;
     @ManyToOne
     @JoinColumn(name = "numFact", referencedColumnName = "numFact")
     private Facturas facturasByNumFact;
@@ -35,17 +39,25 @@ public class Detalle {
         this.cantidad = cantidad;
     }
 
+    public Integer getMonto() {
+        return monto;
+    }
+
+    public void setMonto(Integer monto) {
+        this.monto = monto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Detalle detalle = (Detalle) o;
-        return numD == detalle.numD && Objects.equals(cantidad, detalle.cantidad);
+        return numD == detalle.numD && Objects.equals(cantidad, detalle.cantidad) && Objects.equals(monto, detalle.monto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numD, cantidad);
+        return Objects.hash(numD, cantidad, monto);
     }
 
     public Facturas getFacturasByNumFact() {

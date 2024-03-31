@@ -11,34 +11,48 @@
 
     </head>
     <body>
-        <div class="header">
+    <div class="header">
+        <div>
             <div>
-                <div>
-                    <p>Facturación </p> <p>electronica</p></div> <div><img class="logo" src="../../../static/Images/logo.png"/>&nbsp</div>
-            </div>
-            <div>
-                <ul class="Menu">
-                    <li>
-                        <a href="/presentation/AcercaDe/show">Acerca De</a>
-                    </li>
-                    <li>
-                        <a href="URLdelogin">Login</a>
-                    </li>
-                </ul>
-            </div>
+                <p>Facturación </p> <p>electronica</p></div>
+            <div><img class="logo" src="../static/Images/logo.png" alt=""/></div>
         </div>
-        <form action="urldeaccion">
-            <div>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter Username">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password">
-                <button type="submit">Login</button>
-                <label>New with us?</label>
-                <label>Create your new acount today</label>
-                <label><a href="/newU">CREATE NEW ACCOUNT</a></label>
-            </div>
-        </form>
+
+        <ul class="Menu">
+            <li>
+                <a href="/presentation/AcercaDe/show">Acerca De</a>
+            </li>
+            <li>
+                <a href="/presentation/Login/show">Login</a>
+            </li>
+            <li>
+                <a href="/presentation/Facturar/show">Prueba</a>
+            </li>
+            <li>
+                <a href="">All view's</a>
+                <ul>
+                    <li><br></li>
+                    <li><a href="/presentation/Usuarios/show" title="-">Usuarios</a></li>
+                    <li><a href="/presentation/Clientes/show" title="-">Clientes</a></li>
+                    <li><a href="/presentation/Productos/show" title="-">Productos</a></li>
+                    <li><a href="/presentation/Facturas/show" title="-">Facturas</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <form method="post" action="#" th:action="@{/login/login}">
+        <div>
+            <label for="usern">Username:</label>
+            <input type="text" id="usern" name="usern" placeholder="Enter Username">
+            <label for="pasw">Password:</label>
+            <input type="password" id="pasw" name="pasw" placeholder="Enter Password">
+            <button type="submit">Login</button>
+            <label>New with us?</label>
+            <label>Create your new acount today</label>
+            <label><a href="/newU">CREATE NEW ACCOUNT</a></label>
+        </div>
+    </form>
 
     <div>
         <footer>
@@ -47,3 +61,4 @@
     </div>
     </body>
 </html>
+

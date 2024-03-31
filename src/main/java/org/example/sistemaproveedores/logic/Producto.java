@@ -19,6 +19,9 @@ public class Producto {
     private Double precio;
     @OneToMany(mappedBy = "productoByIdProd")
     private Collection<Detalle> detallesByIdPr;
+    @ManyToOne
+    @JoinColumn(name = "idProd", referencedColumnName = "idP")
+    private Proveedores proveedoresByIdProd;
 
     public String getNombreP() {
         return nombreP;
@@ -63,5 +66,13 @@ public class Producto {
 
     public void setDetallesByIdPr(Collection<Detalle> detallesByIdPr) {
         this.detallesByIdPr = detallesByIdPr;
+    }
+
+    public Proveedores getProveedoresByIdProd() {
+        return proveedoresByIdProd;
+    }
+
+    public void setProveedoresByIdProd(Proveedores proveedoresByIdProd) {
+        this.proveedoresByIdProd = proveedoresByIdProd;
     }
 }
