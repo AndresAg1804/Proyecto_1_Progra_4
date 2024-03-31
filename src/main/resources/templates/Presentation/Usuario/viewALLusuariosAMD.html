@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../static/css/Menu.css">
     <link rel="stylesheet" href="../../../static/css/styleHeaderFooter.css">
+
 </head>
 <body>
 <div class="header">
@@ -36,25 +37,34 @@
         </li>
     </ul>
 </div>
-<div class="center">
-    <table style="border: 4px solid blue">
-        <tr> <th>Username</th> <th>Password</th> <th>Tipo</th> <th>...</th> </tr>
-        <tr th:each="u: ${S_usuarios}">
-            <td th:text="${u.getUsern()}"/>
-            <td th:text="${u.getPasw()}"/>
-            <td th:text="${u.getTipo()}"/>
-            <td><a th:href="@{/presentatio/Usuarios/view(usern=${u.getUsern()})}"></a></td>
-        </tr>
-    </table>
-    <div>
+<div id="center">
+    <div id="amdinfo">
         <th:block th:if="${session.usuario!=null}">
+            <label>Login as AMD with username:</label>
             <th:block th:text="${session.usuario.getUsern()}"></th:block>
         </th:block>
         <th:block th:unless="${session.usuario!=null}">
-            <h1>usDc is null</h1>
+            <h1>null not good</h1>
         </th:block>
-        <h1>safe</h1>
     </div>
+    <br>
+    <table id="tuser" style="border: 4px solid blue">
+        <label>All the 'Provedores' that have created a New User</label>
+        <tr> <th>Username</th> <th>Password</th> <th>Tipo</th> <th>...</th> </tr>
+        <tr th:each="u: ${usuarios_too_approve}">
+            <th:block th:if="${u.getTipo()!='AMD' && u.proveedoresByIdprov.getAprobado()!=1}">
+            <td th:text="${u.getUsern()}"/>
+            <td th:text="${u.getPasw()}"/>
+            <td th:text="${u.getTipo()}"/>
+            </th:block>
+            <td><a th:href="@{/presentatio/Usuarios/view(usern=${u.getUsern()})}"></a></td>
+        </tr>
+    </table>
+    <form method="post" action="#" th:action="@{/amd/approve}">
+        <label for="username">What username do you want to approve</label>
+        <input type="text" id="username" name="username" placeholder="username">
+        <button type="submit">APPROVE</button>
+    </form>
 </div>
 <div>
     <footer>
