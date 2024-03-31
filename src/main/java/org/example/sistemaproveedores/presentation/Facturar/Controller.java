@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 
-
+@SessionAttributes({"clienteFind", "ProductosVenta","proveedor"})
 @org.springframework.stereotype.Controller("Facturar")
 public class Controller {
     @ModelAttribute("clienteFind")
@@ -28,21 +28,25 @@ public class Controller {
     private Service service;
 
     @GetMapping("/presentation/Facturar/show")
-    public String show(Model model) {Proveedores u = new Proveedores();
-        u.setIdP("2555");
-        u.setNombreP("Pedro palotes");
-        u.setAprobado((byte) 1);
-        model.addAttribute("proveedor", u);
+    public String show(HttpSession httpSession, Model model) {
+        Proveedores u=new Proveedores();
+            u.setIdP("2555");
+            u.setNombreP("Pedro palotes");
+            u.setAprobado((byte) 1);
+            model.addAttribute("proveedor",u);
+            httpSession.setAttribute("proveedor", u);
+
         return "Presentation/Facturar/view";
     }
 
-    @PostMapping ("/presentation/Facturar/FindClient") //Busqueda de cliente para facturar
-    public String findUserByID(@RequestParam("nombreC") String id, Model model){
+    @GetMapping ("/presentation/Facturar/FindClient") //Busqueda de cliente para facturar
+    public String findUserByID(@RequestParam("nombreC") String id, Model model, HttpSession httpSession){
         //model.addAttribute("clienteFind", service.clienteFindByID(id));
         Clientes c=new Clientes();
-        c.setNombreC("juan");
+        c.setNombreC("judas");
         model.addAttribute("clienteFind",c);
-        return "Presentation/Facturar/view";
+        httpSession.setAttribute("clienteFind",c);
+        return "redirect:/presentation/Facturar/show";
     }
 
 }

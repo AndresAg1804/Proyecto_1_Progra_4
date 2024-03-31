@@ -41,11 +41,11 @@
         </ul>
     </div>
 </div>
-<form method="post" action="#" th:action="@{/presentation/Facturar/FindClient}" class="SinTabla">
+<form method="get" action="#" th:action="@{/presentation/Facturar/FindClient}" class="SinTabla">
     <label>Proveedor: </label>
-    <label th:text="${proveedor.getNombreP()}"></label>
+    <label th:text="${session.proveedor.getNombreP()}"></label>
     <label for="nombreC">Cliente</label>
-    <label th:text="${clienteFind.getNombreC()}"></label>
+    <label th:text="${session.clienteFind.getNombreC()}"></label>
     <input type="text" id="nombreC" name="nombreC" placeholder="Type the client ID">
     <button type="submit" ></button>
 </form>
