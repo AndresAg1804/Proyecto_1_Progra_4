@@ -6,7 +6,6 @@ import java.util.Objects;
 
 @Entity
 public class Detalle {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "numD")
     private int numD;

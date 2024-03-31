@@ -49,17 +49,29 @@ public class Service {
     //Metodos para usuarios
     public Iterable<Usuarios> usuariosFindAll() {return usuarioRepository.findAll();}
 
-    public void addUsuario(String usern, String pasw, String tipo) {
+    public Usuarios addUsuario(String usern, String pasw, String tipo,String nombreP,String idP) {
+        Proveedores p=new Proveedores();
+        p.setNombreP(nombreP);
+        p.setIdP(idP);
+        p.setAprobado((byte) 0);//0=fals 1=true
+        proveedorRepository.save(p);
     Usuarios u=new Usuarios();
     u.setUsern(usern);
     u.setPasw(pasw);
     u.setTipo(tipo);
+    u.setProveedoresByIdprov(p);
     usuarioRepository.save(u);
+    return u;
     }
     public Usuarios login(String usern,String pasw){
         return usuarioRepository.findByUsernAndPasw(usern,pasw);
     }
 
+    public void approvePRO(String username){
+        Usuarios u=usuarioRepository.findByUsern(username);
+        u.getProveedoresByIdprov().setAprobado((byte)1);
+        usuarioRepository.save(u);
+    };
 
     //Metodos para facturas
     //public Iterable<Facturas> facturasFindAll() {return facturasRepository.findAll();}

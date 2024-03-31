@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 public class Facturas {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "numFact")
     private int numFact;
