@@ -1,16 +1,25 @@
 form{
     background-color: burlywood;
     border-radius: 10px;
-    width: 800px;
+    width: 1000px;
     margin: 0 auto;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     align-items: center;
     font-weight: bolder;
     text-align: center;
+    font-size: x-large;
 }
 
+#box2:first-child{
+    margin-top:50px;
+}
+#box2 p{
+    font-size: xx-large;
+}
+
+
 form div:first-child{
-    margin-top: 10%;
+    margin-top: 20%;
 }
 
 form label{
@@ -27,24 +36,22 @@ form input{
     display:inline-block;
     horiz-align: center;
     width: 400px;
+    height:30px;
     text-align: center;
     margin-top: 20px;
     margin-bottom:20px;
-    margin-inline-start: 50px;
     border: none;
     border-radius: 5px;
 }
 
-.image-button {
-    background-color: transparent;
-    border: none;
+form button{
+    display:inline-block;
+    width: 40px;
+    height: 40px;
+    background-size: cover;
     padding: 0;
-    cursor: pointer;
-}
-
-.image-button img {
-    display: inline-block;
-    height: auto;
+    background-image: url(/static/Images/check.png);
+    border-radius: 5px;
 }
 
 

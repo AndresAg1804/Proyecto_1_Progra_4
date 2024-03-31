@@ -36,7 +36,7 @@ public class Controller {
                      @RequestParam("pasw") String pasw, HttpSession session) {
         Usuarios u=service.login(usern,pasw);
         if(u!=null){
-            session.setAttribute("usuario",u);
+            session.setAttribute("usuario",u);//Aqui hay que agregar al session el atributo donde esta el proveedor
             switch (u.getTipo()){
                 case "PRO":{return "redirect:/presentation/Usuarios/show";}
                 case "ADM":{return "redirect:/presentation/Facturar/show";}
