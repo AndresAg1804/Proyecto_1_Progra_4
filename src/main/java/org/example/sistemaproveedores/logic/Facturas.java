@@ -9,15 +9,18 @@ import java.util.Objects;
 public class Facturas {
 
     @Id
-    @Column(name = "numFact")
+    @Column(name = "numfact")
     private int numFact;
+    @Basic
+    @Column(name = "total")
+    private Integer total;
     @OneToMany(mappedBy = "facturasByNumFact")
     private Collection<Detalle> detallesByNumFact;
     @ManyToOne
-    @JoinColumn(name = "idCliente", referencedColumnName = "idC")
+    @JoinColumn(name = "idcliente", referencedColumnName = "idC")
     private Clientes clientesByIdCliente;
     @ManyToOne
-    @JoinColumn(name = "idProveedor", referencedColumnName = "idP")
+    @JoinColumn(name = "idproveedor", referencedColumnName = "idP")
     private Proveedores proveedoresByIdProveedor;
 
     public int getNumFact() {
@@ -28,17 +31,25 @@ public class Facturas {
         this.numFact = numFact;
     }
 
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Facturas facturas = (Facturas) o;
-        return numFact == facturas.numFact;
+        return numFact == facturas.numFact && Objects.equals(total, facturas.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numFact);
+        return Objects.hash(numFact, total);
     }
 
     public Collection<Detalle> getDetallesByNumFact() {

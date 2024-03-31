@@ -6,6 +6,7 @@ import java.util.Objects;
 
 @Entity
 public class Usuarios {
+
     @Id
     @Column(name = "usern")
     private String usern;

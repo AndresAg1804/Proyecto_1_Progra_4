@@ -74,6 +74,10 @@ public class Service {
     };
 
     //Metodos para facturas
-    //public Iterable<Facturas> facturasFindAll() {return facturasRepository.findAll();}
+    public Iterable<Facturas> findFacturasByIdProveedor(Proveedores prov){
+        Iterable<Facturas> fact = facturasRepository.findFacturasByProveedoresByIdProveedor(prov);
+        int i=0;
+        return fact;
+    }
 
 }
