@@ -41,14 +41,14 @@
 <form method="post" action="#" th:action="@{/Usuarios/newU}">
     <div>
         <label for="usern">Type your username:</label>
-        <input type="text" id="usern" name="usern" size="10" value="" placeholder="Enter Username">
+        <input type="text" id="usern" name="usern" size="10" value="" placeholder="Enter Username" required>
         <label for="pasw">Type your password:</label>
-        <input type="password" id="pasw" name="pasw" size="10" value="" placeholder="Enter Password ">
+        <input type="password" id="pasw" name="pasw" size="10" value="" placeholder="Enter Password " required>
 
         <label for="nombreP">Nombre:</label>
-        <input type="text" id="nombreP" name="nombreP" placeholder="Enter Name">
+        <input type="text" id="nombreP" name="nombreP" placeholder="Enter Name" required>
         <label for="idP">idP:</label>
-        <input type="text" id="idP" name="idP" placeholder="Enter id for the sistem">
+        <input type="text" id="idP" name="idP" placeholder="Enter id for the sistem" required>
 
         <label for="tipo">Role: </label>
         <select name="tipo" id="tipo" >

@@ -45,8 +45,8 @@
     <label>Proveedor: </label>
     <label th:text="${session.usuario.getProveedoresByIdprov().getNombreP()}"></label>
     <label for="nombreC">Cliente</label>
-    <label th:text="${session.clienteFind.getNombreC()}"></label>
-    <input type="text" id="nombreC" name="nombreC" placeholder="Type the client ID">
+
+    <input type="text" id="nombreC" name="nombreC" placeholder="Type the client ID" required>
     <button type="submit" ></button>
 </form>
 
@@ -54,10 +54,28 @@
     <p>Productos</p>
     <form>
     <label for="idP">Producto: </label>
-    <input type="text" id="idP" name="idP" placeholder="Type the product ID">
-    <button type="submit" ></button>
+    <input type="text" id="idP" name="idP" placeholder="Type the product ID" required>
+    <button type="submit"></button>
     </form>
 </form>
+
+<div id="box3">
+    <p>Productos</p>
+    <table>
+        <thead>
+        <tr>
+            <th>...</th>
+            <th>Cantidad</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Monto</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
 
 <div>
     <footer>

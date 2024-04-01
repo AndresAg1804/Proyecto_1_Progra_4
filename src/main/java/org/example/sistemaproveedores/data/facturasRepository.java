@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 
 @Repository
-public interface facturasRepository extends CrudRepository<Facturas, String> {
+public interface facturasRepository extends CrudRepository<Facturas, Integer> {
 
     ArrayList<Facturas> findFacturasByProveedoresByIdProveedor(Proveedores prov);
 }

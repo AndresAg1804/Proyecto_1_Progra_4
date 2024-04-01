@@ -17,6 +17,9 @@ public class Producto {
     @Basic
     @Column(name = "precio")
     private Double precio;
+    @Basic
+    @Column(name = "cant")
+    private Integer cant;
     @OneToMany(mappedBy = "productoByIdProd")
     private Collection<Detalle> detallesByIdPr;
     @ManyToOne
@@ -47,17 +50,25 @@ public class Producto {
         this.precio = precio;
     }
 
+    public Integer getCant() {
+        return cant;
+    }
+
+    public void setCant(Integer cant) {
+        this.cant = cant;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Producto producto = (Producto) o;
-        return Objects.equals(nombreP, producto.nombreP) && Objects.equals(idPr, producto.idPr) && Objects.equals(precio, producto.precio);
+        return Objects.equals(nombreP, producto.nombreP) && Objects.equals(idPr, producto.idPr) && Objects.equals(precio, producto.precio) && Objects.equals(cant, producto.cant);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombreP, idPr, precio);
+        return Objects.hash(nombreP, idPr, precio, cant);
     }
 
     public Collection<Detalle> getDetallesByIdPr() {
