@@ -46,6 +46,10 @@
     <label th:text="${session.usuario.getProveedoresByIdprov().getNombreP()}"></label>
     <label for="nombreC">Cliente</label>
 
+
+    <th:block th:if="${session.cliente!=null}">
+    <th:block th:text="${session.cliente.getNombreC()}"></th:block>
+    </th:block>
     <input type="text" id="nombreC" name="nombreC" placeholder="Type the client ID" required>
     <button type="submit" ></button>
 </form>

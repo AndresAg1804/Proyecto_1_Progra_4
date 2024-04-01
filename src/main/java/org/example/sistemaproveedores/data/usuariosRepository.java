@@ -9,4 +9,5 @@ public interface usuariosRepository extends CrudRepository<Usuarios, String> {
     Usuarios findByUsernAndPasw(String usern,String pasw);
     Usuarios findByUsern(String username);
 
+
 }

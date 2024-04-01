@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @org.springframework.stereotype.Controller("usuarios")
-@SessionAttributes({"usuarios","usuario"})
+@SessionAttributes({"usuarios","usuario","a","b"})
 //solo el path, como decir un objecto espesifico para poder manerjar este servlet
 //agara la info
 public class Controller {
