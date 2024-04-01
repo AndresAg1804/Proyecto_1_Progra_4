@@ -5,7 +5,8 @@
     <title>Clientes</title>
     <link rel="stylesheet" href="../../../static/css/Menu.css">
     <link rel="stylesheet" href="../../../static/css/styleHeaderFooter.css">
-
+<!--    <link rel="stylesheet" href="../../../static/css/formTablas.css">-->
+    <link rel="stylesheet" href="../../../static/css/tablaClientes.css">
 </head>
 <body>
 <div class="header">
@@ -36,5 +37,106 @@
         </ul>
     </div>
 </div>
+
+<div class="body">
+    <div>
+        <table>
+            <caption>Clientes</caption>
+            <thead>
+            <tr>
+                <th>Identificacion</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.getIdC()}"></td>
+                <td th:text="${cliente.getNombreC()}"></td>
+                <td th:text="${cliente.getCorreo()}"></td>
+                <td th:text="${cliente.getTelefono()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h1 class="caption">Editar...</h1>
+        <form action="/presentation/Clientes/create" th:object="${clienteEdit}" method="post">
+            <div class="form">
+                <div>
+                    <div>Identificacion</div>
+                    <div>
+                        <input type="text" th:field="*{idC}">
+                    </div>
+                </div>
+                <div>
+                    <div>Nombre</div>
+                    <div>
+                        <input type="text" th:field="*{nombreC}">
+                    </div>
+                </div>
+                <div>
+                    <div>Correo</div>
+                    <div>
+                        <input type="text" th:field="*{correo}">
+                    </div>
+                </div>
+                <div>
+                    <div>Telefono</div>
+                    <div>
+                        <input type="text" th:field="*{telefono}">
+                    </div>
+                </div>
+                <div>
+                    <button type="submit">Editar</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="footer">
+    <p>Proyecto 1 - Programación Web</p>
+</div>
+
 </body>
 </html>
+
+
+<!--
+<form>
+    &lt;!&ndash;    <p>Clientes</p>
+        <form>
+        <label for="idP"> </label>
+        <input type="text" id="idP" name="idP" placeholder="Type the client ID" required>
+        <button type="submit"></button>
+        </form>&ndash;&gt;
+    <p>Clientes</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Identificacion</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Telefono</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:r></tr>
+        <tr th:each="cliente : ${clientes}">
+            <td th:text="${cliente.getIdC()}"></td>
+            <td th:text="${cliente.getNombreC()}"></td>
+            <td th:text="${cliente.getCorreo()}"></td>
+            <td th:text="${cliente.getTelefono()}"></td>
+            &lt;!&ndash;<td>
+                <a th:href="@{/presentation/Clientes/edit/{id}(id=${cliente.getId()})}">Editar</a>
+                <a th:href="@{/presentation/Clientes/delete/{id}(id=${cliente.getId()})}">Eliminar</a>
+            </td>&ndash;&gt;
+        </tr>
+        </tbody>
+    </table>
+
+</form>-->
