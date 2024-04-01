@@ -30,6 +30,8 @@ public class Controller {
     @ModelAttribute("proveedor")     public Proveedores proveedor() {return new Proveedores(); }
 
 
+
+
     @GetMapping("/presentation/Clientes/show")
     public String show(Model model) {
         model.addAttribute("clientes", service.clienteFindAll());
@@ -37,11 +39,16 @@ public class Controller {
     }
 
     @PostMapping("/presentation/Clientes/search")
-    public String search(@ModelAttribute("clienteSearch") Clientes clienteSearch, @ModelAttribute(name="proveedor", binding=false)Proveedores proveedor, Model model){
-        //model.addAttribute("clientes", service.clienteSearch(proveedor, clienteSearch.getNombreC()))
-        //model.addAtribute("clienteEdit", new Clientes());
-        return "Presentation/Clientes/View";
+    public String search(
+            @ModelAttribute("clienteSearch") Clientes clienteSearch,
+            @ModelAttribute(name="proveedor", binding = false) Proveedores proveedor,
+            Model model) {
+        model.addAttribute("clientes", service.clienteFindByProveedor(clienteSearch.getProveedoresByProveedorid().getIdP()));
+//        model.addAttribute("clientes", service.clienteSearch(proveedor, clienteSearch.getNombreC()));
+        model.addAttribute("clienteEdit", new Clientes());
+        return "/Presentation/Clientes/view";
     }
+
 
 
 
