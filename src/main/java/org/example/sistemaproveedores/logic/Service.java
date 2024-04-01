@@ -33,6 +33,10 @@ public class Service {
         return clienteRepository.findClientesByProveedor(idProveedor);
     }
 
+    public Clientes clienteFindByIDyProvedor(String idc, Proveedores proveedores){
+        return clienteRepository.findByIdCAndProveedoresByProveedorid(idc,proveedores);
+    }
+
     public void addCliente(String nombreC, String idC, String correo, int telefono, Proveedores proveedor){
         Clientes c=new Clientes();
         c.setIdC(idC);
@@ -69,7 +73,7 @@ public class Service {
 
     public void approvePRO(String username){
         Usuarios u=usuarioRepository.findByUsern(username);
-        u.getProveedoresByIdprov().setAprobado((byte)1);
+        u.getProveedoresByIdprov().setAprobado((byte)1);//boole
         usuarioRepository.save(u);
     };
 
