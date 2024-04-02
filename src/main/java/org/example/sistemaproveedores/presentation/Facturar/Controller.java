@@ -14,9 +14,6 @@ import java.util.Optional;
 @SessionAttributes({ "Facturar","ProductosVentaS","cliente"})
 public class Controller {
 
-    @ModelAttribute("Facturar")
-    public ArrayList<Producto> productosVenta() {return new ArrayList<Producto>();}
-
 
     @Autowired
     private Service service;
@@ -24,15 +21,21 @@ public class Controller {
     @GetMapping("/presentation/Facturar/show")
     public String show(HttpSession session, Model model) {
         //model.addAttribute("ProductosVenta", new ArrayList<Producto>());
-        Clientes cjp=null;
+        Clientes clienteP=null;
+        ArrayList<Producto> productosP=null;
         try{
-            cjp=(Clientes)session.getAttribute("cliente");
+            clienteP=(Clientes)session.getAttribute("cliente");
         }catch (Exception e){
-            cjp=new Clientes();
-            cjp.setIdC("Juan");
-            cjp.setNombreC("Juan");
+            clienteP=new Clientes();
         }
-        session.setAttribute("cliente", cjp);
+        session.setAttribute("cliente", clienteP);
+
+        try{
+            productosP=(ArrayList<Producto>)session.getAttribute("ProductosVentaS");
+        }catch(Exception f){
+            productosP=new ArrayList<Producto>();
+        }
+        session.setAttribute("ProductosVentaS", productosP);
 
 
         return "Presentation/Facturar/view";
@@ -49,5 +52,19 @@ public class Controller {
 
         return "Presentation/Facturar/view";
     }
-
+    @GetMapping ("/presentation/Facturar/AddProduct")
+    public String findProducto(HttpSession session, @RequestParam("idP") String idProducto){
+        Usuarios u= (Usuarios) session.getAttribute("usuario");
+        Proveedores p= u.getProveedoresByIdprov();
+        ArrayList<Producto> productosP=null;
+        try{
+            productosP=(ArrayList<Producto>)session.getAttribute("ProductosVentaS");
+            productosP.add(service.findProdByIdAndProveedor(idProducto,p));
+        }catch(Exception f){
+            productosP=new ArrayList<Producto>();
+            productosP.add(service.findProdByIdAndProveedor(idProducto,p));
+        }
+        session.setAttribute("ProductosVentaS", productosP);
+        return "Presentation/Facturar/view";
+    }
 }
