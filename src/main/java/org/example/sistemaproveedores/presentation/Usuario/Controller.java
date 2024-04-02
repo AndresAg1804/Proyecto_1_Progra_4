@@ -50,13 +50,19 @@ public class Controller {
         Usuarios ulog=null;
             try {
                 ulog=service.login(usern,pasw);
-                if(ulog!=null && ulog.getProveedoresByIdprov().getAprobado().equals((byte)1) ) { //1==true , esta aprovado
-                    session.setAttribute("usuario", ulog);
+                if(ulog!=null  ) { //1==true , esta aprovado
                     switch (ulog.getTipo()) {
                         case "PRO": {
-                            return "redirect:/presentation/Usuarios/show";
+                            if(ulog.getProveedoresByIdprov().getAprobado().equals((byte)1)){
+                                session.setAttribute("usuario", ulog);
+                                return "redirect:/presentation/Usuarios/show";
+                            }
+                            else{
+                                return "index";
+                            }
                         }
                         case "ADM": {
+                            session.setAttribute("usuario", ulog);
                             return "redirect:/presentation/Usuarios/amd";
                         }
                         default: {
