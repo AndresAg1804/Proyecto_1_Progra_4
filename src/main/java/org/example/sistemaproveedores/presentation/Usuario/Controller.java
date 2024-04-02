@@ -50,14 +50,19 @@ public class Controller {
         Usuarios ulog=null;
             try {
                 ulog=service.login(usern,pasw);
-                if(ulog==null){
-                    return "/index";
-                }
-                session.setAttribute("usuario",ulog);
-                switch (ulog.getTipo()){
-                    case "PRO":{return "redirect:/presentation/Usuarios/show";}
-                    case "ADM":{return "redirect:/presentation/Usuarios/amd";}
-                    default:{return "index";}
+                if(ulog!=null && ulog.getProveedoresByIdprov().getAprobado().equals((byte)1) ) { //1==true , esta aprovado
+                    session.setAttribute("usuario", ulog);
+                    switch (ulog.getTipo()) {
+                        case "PRO": {
+                            return "redirect:/presentation/Usuarios/show";
+                        }
+                        case "ADM": {
+                            return "redirect:/presentation/Usuarios/amd";
+                        }
+                        default: {
+                            return "index";
+                        }
+                    }
                 }
             }
             catch (Exception ex){
@@ -74,7 +79,7 @@ public class Controller {
     @PostMapping("/amd/approve")//regi y mande a otro lado
     public String AMDapprove(@RequestParam("username") String username,
                                    Model model, HttpSession session) {
-        service.approvePRO(username);
+        service.changePRO(username);
         return "redirect:/presentation/Usuarios/amd";
     }
     @GetMapping("/presentation/OUT/OUT")

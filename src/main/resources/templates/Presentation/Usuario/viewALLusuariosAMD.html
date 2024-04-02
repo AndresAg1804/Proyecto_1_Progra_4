@@ -50,7 +50,9 @@
 <div id="center">
     <br>
     <table id="tuser" style="border: 3px solid black">
-        <label>All the 'Provedores' that have created a New User</label>
+        <label class="letterA">System users</label>
+        <br>
+        <br>
         <tr> <th>Username</th> <th>Password</th> <th>Tipo</th> <th>Estado</th> </tr>
         <tr th:each="u: ${usuarios_too_approve}">
             <th:block th:if="${(u.getTipo().equals('PRO'))}">
@@ -69,10 +71,12 @@
             <td><a th:href="@{/presentatio/Usuarios/view(usern=${u.getUsern()})}"></a></td>
         </tr>
     </table>
-    <form method="post" action="#" th:action="@{/amd/approve}">
-        <label for="username">What username do you want to approve</label>
-        <input type="text" id="username" name="username" placeholder="username">
-        <button type="submit">APPROVE</button>
+    <br>
+    <br>
+    <form class="letterB" method="post" action="#" th:action="@{/amd/approve}">
+        <label for="username">What username do you want to change its approvel status?</label>
+        <input type="text" id="username" name="username" placeholder="username" required>
+        <button type="submit">CHANGE</button>
     </form>
 </div>
 <div>

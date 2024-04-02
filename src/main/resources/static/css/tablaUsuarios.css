@@ -22,3 +22,19 @@
     text-decoration: none;
     color: blue;
 }
+.letterA{
+    font-family: "Bradley Hand ITC";
+    font-weight: bold;
+    text-align: center;
+    margin-left: 44%;
+    font-size:  x-large;
+}
+.letterB{
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
