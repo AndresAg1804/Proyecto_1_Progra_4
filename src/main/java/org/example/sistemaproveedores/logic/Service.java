@@ -67,8 +67,16 @@ public class Service {
     usuarioRepository.save(u);
     return u;
     }
+
+    public boolean existeU(String us){
+        return usuarioRepository.existsById(us);
+    }
+
     public Usuarios login(String usern,String pasw){
-        return usuarioRepository.findByUsernAndPasw(usern,pasw);
+        if(existeU(usern)==true){
+            return usuarioRepository.findByUsernAndPasw(usern,pasw);
+        }
+        return null;
     }
 
     public void approvePRO(String username){

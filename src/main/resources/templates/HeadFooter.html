@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+
     <title>Facturacion</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/styleHeaderFooter.css">
-    <link rel="stylesheet" href="../../static/css/Menu.css">
-    <link rel="stylesheet" href="../../static/css/formLogin.css">
+    <link rel="stylesheet" th:href="@{../../css/styleHeadFooter.css}">
+    <link rel="stylesheet" th:href="@{../../css/Menu.css}">
+    <link rel="stylesheet" th:href="@{../../css/formLogin.css}">
+
 </head>
 <body>
+<header th:fragment="header">
 <div class="header">
     <div>
         <div>
@@ -23,10 +27,10 @@
             <a href="/presentation/Login/show">Login</a>
         </li>
         <li>
-            <a href="/presentation/Facturar/show">Prueba</a>
+            <a href="/presentation/OUT/show">Logout</a>
         </li>
         <li>
-            <a href="/presentation/OUT/OUT">Logout</a>
+            <a href="/presentation/Facturar/show">Prueba</a>
         </li>
         <li>
             <a href="">All view's</a>
@@ -40,25 +44,12 @@
         </li>
     </ul>
 </div>
+</header>
 
-<form method="post" action="#" th:action="@{/login/login}">
-    <div>
-        <label for="usern">Username:</label>
-        <input type="text" id="usern" name="usern" placeholder="Enter Username" required>
-        <label for="pasw">Password:</label>
-        <input type="password" id="pasw" name="pasw" placeholder="Enter Password" required>
-        <button type="submit">Login</button>
-        <label>New with us?</label>
-        <label>Create your new acount today</label>
-        <label><a href="/newU">CREATE NEW ACCOUNT</a></label>
-    </div>
-</form>
+<footer th:fragment="footer">
+    facturasOnline@best.team.com
+</footer>
 
-<div>
-    <footer>
-        facturasOnline@best.team.com
-    </footer>
-</div>
+
 </body>
 </html>
-
