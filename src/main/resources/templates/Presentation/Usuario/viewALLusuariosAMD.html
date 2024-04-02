@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../static/css/Menu.css">
     <link rel="stylesheet" href="../../../static/css/styleHeaderFooter.css">
+    <link rel="stylesheet" href="../../../static/css/tablaUsuarios.css">
+
 
 </head>
 <body>
@@ -16,10 +18,18 @@
     </div>
     <ul class="Menu">
         <li>
+            <th:block th:if="${session.usuario!=null}">
+                <a>Login as <th:block th:text="${session.usuario.getUsern()}"></th:block></a>
+            </th:block>
+            <th:block th:unless="${session.usuario!=null}">
+                <a>null</a>
+            </th:block>
+        </li>
+        <li>
             <a href="/presentation/AcercaDe/show">Acerca De</a>
         </li>
         <li>
-            <a href="/presentation/Login/show">Login</a>
+            <a href="/presentation/OUT/OUT">Logout</a>
         </li>
         <li>
             <a href="/presentation/Facturar/show">Prueba</a>
@@ -38,24 +48,23 @@
     </ul>
 </div>
 <div id="center">
-    <div id="amdinfo">
-        <th:block th:if="${session.usuario!=null}">
-            <label>Login as AMD with username:</label>
-            <th:block th:text="${session.usuario.getUsern()}"></th:block>
-        </th:block>
-        <th:block th:unless="${session.usuario!=null}">
-            <h1>null not good</h1>
-        </th:block>
-    </div>
     <br>
-    <table id="tuser" style="border: 4px solid blue">
+    <table id="tuser" style="border: 3px solid black">
         <label>All the 'Provedores' that have created a New User</label>
-        <tr> <th>Username</th> <th>Password</th> <th>Tipo</th> <th>...</th> </tr>
+        <tr> <th>Username</th> <th>Password</th> <th>Tipo</th> <th>Estado</th> </tr>
         <tr th:each="u: ${usuarios_too_approve}">
-            <th:block th:if="${u.getTipo()!='AMD' && u.proveedoresByIdprov.getAprobado()!=1}">
+            <th:block th:if="${(u.getTipo().equals('PRO'))}">
             <td th:text="${u.getUsern()}"/>
             <td th:text="${u.getPasw()}"/>
             <td th:text="${u.getTipo()}"/>
+
+                <th:block th:if="${u.getProveedoresByIdprov().getAprobado()==0 }">
+                    <td th:text="Pendiente"/>
+                </th:block>
+                <th:block th:unless="${u.getProveedoresByIdprov().getAprobado()==0  }">
+                    <td th:text="Aprovado"/>
+                </th:block>
+
             </th:block>
             <td><a th:href="@{/presentatio/Usuarios/view(usern=${u.getUsern()})}"></a></td>
         </tr>

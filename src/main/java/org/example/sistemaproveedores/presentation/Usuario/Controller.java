@@ -4,12 +4,13 @@ import jakarta.servlet.http.HttpSession;
 import org.example.sistemaproveedores.logic.Proveedores;
 import org.example.sistemaproveedores.logic.Service;
 import org.example.sistemaproveedores.logic.Usuarios;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @org.springframework.stereotype.Controller("usuarios")
-@SessionAttributes({"usuarios","usuario","a","b"})
+@SessionAttributes({"usuarios"})
 //solo el path, como decir un objecto espesifico para poder manerjar este servlet
 //agara la info
 public class Controller {
@@ -22,8 +23,12 @@ public class Controller {
     public String SENDnewU() {//index->newU
         return "/Presentation/Usuario/newU";
     }
+    @GetMapping("/regreso")
+    public String mostrarindex() {
+        return "index";
+    }
     @GetMapping("/presentation/Usuarios/show")// like mande a otro lado
-    public String show(Model model){// index/menu->show all usuarios
+    public String show(Model model,HttpSession session){// index/menu->show all usuarios
         model.addAttribute("S_usuarios", service.usuariosFindAll());
         return "/Presentation/Usuario/view";
     }
@@ -37,24 +42,32 @@ public class Controller {
         Usuarios u=service.addUsuario(usern,pasw,tipo,nombreP,idP);
         return "index";
     }
+
     @PostMapping("/login/login")
     public String login(@RequestParam("usern") String usern,
                      @RequestParam("pasw") String pasw, HttpSession session) {
-        Usuarios u=service.login(usern,pasw);
-        if(u!=null){
-            session.setAttribute("usuario",u);//Aqui hay que agregar al session el atributo donde esta el proveedor
-            switch (u.getTipo()){
-                case "PRO":{return "redirect:/presentation/Usuarios/show";}
-                case "ADM":{return "redirect:/presentation/Usuarios/amd";}
-                default:{return "index";}
+
+        Usuarios ulog=null;
+            try {
+                ulog=service.login(usern,pasw);
+                if(ulog==null){
+                    return "/index";
+                }
+                session.setAttribute("usuario",ulog);
+                switch (ulog.getTipo()){
+                    case "PRO":{return "redirect:/presentation/Usuarios/show";}
+                    case "ADM":{return "redirect:/presentation/Usuarios/amd";}
+                    default:{return "index";}
+                }
             }
-        }
-        else{
-            return "redirect:index";
-        }
+            catch (Exception ex){
+
+            }
+            return "/index";
+
     }
     @GetMapping("/presentation/Usuarios/amd")
-    public String AMDapprove(Model model) {Proveedores u = new Proveedores();
+    public String AMDapprove(Model model,HttpSession session) {Proveedores u = new Proveedores();
         model.addAttribute("usuarios_too_approve", service.usuariosFindAll());
         return "/Presentation/Usuario/viewALLusuariosAMD";
     }
@@ -63,6 +76,11 @@ public class Controller {
                                    Model model, HttpSession session) {
         service.approvePRO(username);
         return "redirect:/presentation/Usuarios/amd";
+    }
+    @GetMapping("/presentation/OUT/OUT")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/regreso";
     }
 }
 
