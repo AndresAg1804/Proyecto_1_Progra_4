@@ -50,17 +50,15 @@
     <th:block th:if="${session.cliente!=null}">
     <th:block th:text="${session.cliente.getNombreC()}"></th:block>
     </th:block>
-    <input type="text" id="nombreC" name="nombreC" placeholder="Type the client ID" required>
+    <input type="text" id="nombreC" name="nombreC" placeholder="Type the client ID" >
     <button type="submit" ></button>
 </form>
 
-<form id="box2">
+<form id="box2" method="get" action="#" th:action="@{/presentation/Facturar/AddProduct}">
     <p>Productos</p>
-    <form>
     <label for="idP">Producto: </label>
-    <input type="text" id="idP" name="idP" placeholder="Type the product ID" required>
+    <input type="text" id="idP" name="idP" placeholder="Type the product ID" >
     <button type="submit"></button>
-    </form>
 </form>
 
 <div id="box3">
@@ -76,6 +74,12 @@
         </tr>
         </thead>
         <tbody>
+        <tr th:each="prod: ${session.ProductosVentaS}">
+            <td th:text="${prod.getCant()}"></td>
+            <td th:text="${prod.getNombreP()}"></td>
+            <td th:text="${prod.getPrecio()}"></td>
+            <td th:text="${prod.getPrecio() * prod.getCant()}"></td>
+        </tr>
 
         </tbody>
     </table>
