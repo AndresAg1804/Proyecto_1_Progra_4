@@ -6,6 +6,7 @@ import org.example.sistemaproveedores.data.ClienteRepository;
 import org.example.sistemaproveedores.data.ProveedorRepository;
 import org.example.sistemaproveedores.data.facturasRepository;
 import org.example.sistemaproveedores.data.usuariosRepository;
+import org.example.sistemaproveedores.data.ProductosRepository;
 import org.springframework.beans.factory.annotation.*;
 
 import java.util.Optional;
@@ -20,6 +21,8 @@ public class Service {
     private usuariosRepository usuarioRepository;
     @Autowired
     private facturasRepository facturasRepository;
+    @Autowired
+    private ProductosRepository productosRepository;
 
     //Metodos para clientes
     public Iterable<Clientes> clienteFindAll(){
@@ -87,9 +90,12 @@ public class Service {
 
     //Metodos para facturas
     public Iterable<Facturas> findFacturasByIdProveedor(Proveedores prov){
-        Iterable<Facturas> fact = facturasRepository.findFacturasByProveedoresByIdProveedor(prov);
-        int i=0;
-        return fact;
+        return facturasRepository.findFacturasByProveedoresByIdProveedor(prov);
+    }
+
+    //Metodos para productos
+    public Producto findProdByIdAndProveedor(String id, Proveedores prov){
+        return productosRepository.findByIdPrAndProveedoresByIdProd(id,prov);
     }
 
 }
