@@ -79,10 +79,19 @@ public class Service {
         return null;
     }
 
-    public void approvePRO(String username){
-        Usuarios u=usuarioRepository.findByUsern(username);
-        u.getProveedoresByIdprov().setAprobado((byte)1);//boole
-        usuarioRepository.save(u);
+    public void changePRO(String username){
+        Usuarios u=null;
+        if(existeU(username)==true) {
+            u = usuarioRepository.findByUsern(username);
+            if (u.getProveedoresByIdprov().getAprobado().equals((byte) 0)) {
+                u.getProveedoresByIdprov().setAprobado((byte) 1);
+            } else {
+                u.getProveedoresByIdprov().setAprobado((byte) 0);//boole
+            }
+            usuarioRepository.save(u);
+        }
+        //          1=true;
+        //          0=false;
     };
 
     //Metodos para facturas
