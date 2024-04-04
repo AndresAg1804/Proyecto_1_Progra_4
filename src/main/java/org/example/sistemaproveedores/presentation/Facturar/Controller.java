@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 @org.springframework.stereotype.Controller("Facturar")
-@SessionAttributes({ "Facturar","ProductosVentaS","cliente"})
+@SessionAttributes({ "Facturar"})
 public class Controller {
 
 
@@ -22,21 +22,31 @@ public class Controller {
     public String show(HttpSession session, Model model) {
         //model.addAttribute("ProductosVenta", new ArrayList<Producto>());
         Clientes clienteP=null;
-        ArrayList<Producto> productosP=null;
-        try{
-            clienteP=(Clientes)session.getAttribute("cliente");
-        }catch (Exception e){
+        ArrayList<Detalle> detalleP=null;
+        Facturas facturaP=null;
+        Usuarios u= (Usuarios) session.getAttribute("usuario");
+        Proveedores p= u.getProveedoresByIdprov();
+
+        clienteP=(Clientes)session.getAttribute("cliente");
+        if (clienteP==null){
             clienteP=new Clientes();
         }
         session.setAttribute("cliente", clienteP);
 
-        try{
-            productosP=(ArrayList<Producto>)session.getAttribute("ProductosVentaS");
-        }catch(Exception f){
-            productosP=new ArrayList<Producto>();
-        }
-        session.setAttribute("ProductosVentaS", productosP);
 
+        detalleP=(ArrayList<Detalle>)session.getAttribute("DetallesVentaS");
+        if(detalleP==null){
+            detalleP=new ArrayList<Detalle>();
+        }
+        session.setAttribute("DetallesVentaS",detalleP);
+
+
+        facturaP=(Facturas) session.getAttribute("factura");
+        if(facturaP==null){
+            facturaP=new Facturas();
+            facturaP.setProveedoresByIdProveedor(p);
+        }
+        session.setAttribute("factura", facturaP);
 
         return "Presentation/Facturar/view";
     }
@@ -46,9 +56,13 @@ public class Controller {
         //model.addAttribute("cliente", service.clienteFindByID(id));
         Usuarios u= (Usuarios) session.getAttribute("usuario");
         Proveedores p= u.getProveedoresByIdprov();
+        Facturas fact= (Facturas) session.getAttribute("factura");
 
-        Clientes cjp=service.clienteFindByIDyProvedor(id, p);
-        session.setAttribute("cliente", cjp);
+        Clientes cli=service.clienteFindByIDyProvedor(id, p);
+        session.setAttribute("cliente", cli);
+
+        fact.setClientesByIdCliente(cli);
+        session.setAttribute("factura", fact);
 
         return "Presentation/Facturar/view";
     }
@@ -56,15 +70,20 @@ public class Controller {
     public String findProducto(HttpSession session, @RequestParam("idP") String idProducto){
         Usuarios u= (Usuarios) session.getAttribute("usuario");
         Proveedores p= u.getProveedoresByIdprov();
-        ArrayList<Producto> productosP=null;
-        try{
-            productosP=(ArrayList<Producto>)session.getAttribute("ProductosVentaS");
-            productosP.add(service.findProdByIdAndProveedor(idProducto,p));
-        }catch(Exception f){
-            productosP=new ArrayList<Producto>();
-            productosP.add(service.findProdByIdAndProveedor(idProducto,p));
+        ArrayList<Detalle> detalleP=null;
+        Detalle nuevo = new Detalle();
+        nuevo.setCantidad(1);
+
+
+            detalleP=(ArrayList<Detalle>)session.getAttribute("DetallesVentaS");
+            nuevo.setProductoByIdProd(service.findProdByIdAndProveedor(idProducto,p));
+            //nuevo.setMonto(nuevo.getProductoByIdProd().getPrecio() * nuevo.getCantidad()); //Cambiar el monto en la base de datos a un float
+        if(detalleP==null){
+            detalleP=new ArrayList<Detalle>();
+            nuevo.setProductoByIdProd(service.findProdByIdAndProveedor(idProducto,p));
         }
-        session.setAttribute("ProductosVentaS", productosP);
+        detalleP.add(nuevo);
+        session.setAttribute("DetallesVentaS", detalleP);
         return "Presentation/Facturar/view";
     }
 }
