@@ -54,6 +54,12 @@
             </tr>
             </thead>
             <tbody>
+            <tr>
+                <form action="/presentation/Clientes/search" th:object="${clienteSearch}" method="post">
+                    <input type="text" th:field="*{idC}" placeholder="Type the client ID" required>
+                    <input type="submit" value="Search">
+                </form>
+            </tr>
             <tr th:each="cliente : ${clientes}">
                 <td th:text="${cliente.getIdC()}"></td>
                 <td th:text="${cliente.getNombreC()}"></td>
