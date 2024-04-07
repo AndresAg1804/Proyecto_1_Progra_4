@@ -77,11 +77,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="prod: ${session.ProductosVentaS}">
-            <td th:text="${prod.getCant()}"></td>
-            <td th:text="${prod.getNombreP()}"></td>
-            <td th:text="${prod.getPrecio()}"></td>
-            <td th:text="${prod.getPrecio() * prod.getCant()}"></td>
+        <tr th:each="det: ${session.DetallesVentaS}">
+            <td></td>
+            <td th:text="${det.getCantidad()}"></td>
+            <td th:text="${det.getProductoByIdProd().getNombreP()}"></td>
+            <td th:text="${det.getProductoByIdProd().getPrecio()}"></td>
+            <td th:text="${det.getMonto()}"></td>
         </tr>
 
         </tbody>
