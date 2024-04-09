@@ -56,6 +56,8 @@ public class Service {
     //Metodos para usuarios
     public Iterable<Usuarios> usuariosFindAll() {return usuarioRepository.findAll();}
 
+    public Iterable<Producto> get_all_productos_de_user(){return productosRepository.findAll();}
+
     public Usuarios addUsuario(String usern, String pasw, String tipo,String nombreP,String idP) {
         Proveedores p=new Proveedores();
         p.setNombreP(nombreP);
@@ -106,5 +108,12 @@ public class Service {
     public Producto findProdByIdAndProveedor(String id, Proveedores prov){
         return productosRepository.findByIdPrAndProveedoresByIdProd(id,prov);
     }
+    public Proveedores get_ProvedorBYID(String id){
+        return usuarioRepository.findByUsern(id).getProveedoresByIdprov();
+    }
+    public void addProdcuto(Producto p){
+        productosRepository.save(p);
+    }
+
 
 }

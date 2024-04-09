@@ -93,5 +93,6 @@ public class Controller {
         session.invalidate();
         return "redirect:/regreso";
     }
+    //@psot recive un parametro Cliente->ese lo setea spring mientras el url que yo le mande en el <a th=href="@{/aaa/aaa/(numero=${c.getID} )}"> tenga
 }
 
