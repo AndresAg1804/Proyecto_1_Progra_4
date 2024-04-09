@@ -7,9 +7,8 @@ import java.util.Objects;
 
 @Entity
 public class Facturas {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "numfact")
+    @Column(name = "numFact")
     private int numFact;
     @Basic
     @Column(name = "total")
@@ -17,11 +16,14 @@ public class Facturas {
     @OneToMany(mappedBy = "facturasByNumFact")
     private Collection<Detalle> detallesByNumFact;
     @ManyToOne
-    @JoinColumn(name = "idcliente", referencedColumnName = "idC")
+    @JoinColumns(@JoinColumn(name = "idCliente", referencedColumnName = "idC"))
     private Clientes clientesByIdCliente;
     @ManyToOne
-    @JoinColumn(name = "idproveedor", referencedColumnName = "idP")
+    @JoinColumns(@JoinColumn(name = "idProveedor", referencedColumnName = "idP"))
     private Proveedores proveedoresByIdProveedor;
+    @Basic
+    @Column(name = "fecha")
+    private String fecha;
 
     public int getNumFact() {
         return numFact;
@@ -74,5 +76,13 @@ public class Facturas {
 
     public void setProveedoresByIdProveedor(Proveedores proveedoresByIdProveedor) {
         this.proveedoresByIdProveedor = proveedoresByIdProveedor;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }
