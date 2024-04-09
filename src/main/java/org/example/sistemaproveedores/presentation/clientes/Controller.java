@@ -27,7 +27,7 @@ public class Controller {
 
     @ModelAttribute("clienteEdit") public Clientes clienteEdit() {return new Clientes(); }
 
-    @ModelAttribute("proveedor")     public Proveedores proveedor() {return new Proveedores(); }
+    @ModelAttribute("proveedor")    public Proveedores proveedor() {return new Proveedores(); }
 
 
 
