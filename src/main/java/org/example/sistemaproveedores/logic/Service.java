@@ -9,6 +9,7 @@ import org.example.sistemaproveedores.data.usuariosRepository;
 import org.example.sistemaproveedores.data.ProductosRepository;
 import org.springframework.beans.factory.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @org.springframework.stereotype.Service("service")
@@ -50,6 +51,10 @@ public class Service {
         c.setCorreo(cliente.getCorreo());
         c.setTelefono(cliente.getTelefono());
         clienteRepository.save(c);
+    }
+
+    public List<Clientes> buscarClientesPorNombreYProveedor(String nombre, Proveedores proveedores){
+        return clienteRepository.findClientesByNombreCContainsAndProveedoresByProveedorid(nombre,proveedores);
     }
 
     //Metodos para proveedores

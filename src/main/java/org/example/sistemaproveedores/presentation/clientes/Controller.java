@@ -41,11 +41,11 @@ public class Controller {
     @PostMapping("/presentation/Clientes/search")
     public String search(
             @ModelAttribute("clienteSearch") Clientes clienteSearch,
-            @ModelAttribute(name="proveedor", binding = false) Proveedores proveedor,
+            HttpSession session,
             Model model) {
-        model.addAttribute("clientes", service.clienteFindByProveedor(clienteSearch.getProveedoresByProveedorid().getIdP()));
-//        model.addAttribute("clientes", service.clienteSearch(proveedor, clienteSearch.getNombreC()));
-        model.addAttribute("clienteEdit", new Clientes());
+        Proveedores proveedor = (Proveedores) session.getAttribute("proveedor");
+        model.addAttribute("clientes", service.buscarClientesPorNombreYProveedor(clienteSearch.getNombreC(), proveedor));
+
         return "/Presentation/Clientes/view";
     }
 
