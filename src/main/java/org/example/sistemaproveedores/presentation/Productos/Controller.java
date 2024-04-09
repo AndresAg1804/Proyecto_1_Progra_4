@@ -18,8 +18,21 @@ public class Controller {
     private Service service;
 
     @GetMapping("/presentation/Productos/show")
-    public String show(Model model) {
-        model.addAttribute("productos", service.proveedorFindAll());
+    public String show(Model model,HttpSession session) {
+
+        if(session.getAttribute("proEDIT")!=null){
+            Producto proEDIT = (Producto) session.getAttribute("proEDIT");
+            if(proEDIT.getNombreP()!=""){
+                model.addAttribute("proEDIT", proEDIT);
+            }
+            else{
+                model.addAttribute("proEDIT", null);
+            }
+        }
+        //existe una mejor manera? si
+        Usuarios u=(Usuarios) session.getAttribute("usuario");
+        model.addAttribute("productos",service.get_all_productos_de_IDprovedor(u.getProveedoresByIdprov().getIdP()));
+
         return "/Presentation/Productos/view";
     }
     @GetMapping("/set/editpro") //por mas que modifique los <a> solo pueden ser GetMapping
@@ -36,7 +49,7 @@ public class Controller {
         Producto pp=new Producto(idPr,nombreP,precio,cant);
         session.setAttribute("proEDIT", pp);
         model.addAttribute("proEDIT",pp);
-        return "redirect:/pre/Productos/show";
+        return "redirect:/presentation/Productos/show";
     }
     @PostMapping("/productos/add")
     public String appPRO(@RequestParam("idPr") String idPr,
@@ -51,12 +64,7 @@ public class Controller {
         service.addProdcuto(p);
         session.setAttribute("proEDIT", null);
         model.addAttribute("proEDIT",null);
-        return "redirect:/";
+        return "redirect:/presentation/Productos/show";
     }
 
-    @GetMapping("/productos/cancel")
-    public String cancelar(Model model,HttpSession session){
-        session.invalidate();
-        return "redirect:/";
-    }
 }

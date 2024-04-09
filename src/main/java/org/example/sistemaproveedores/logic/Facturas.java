@@ -8,7 +8,7 @@ import java.util.Objects;
 @Entity
 public class Facturas {
     @Id
-    @Column(name = "numFact")
+    @Column(name = "numfact")
     private int numFact;
     @Basic
     @Column(name = "total")

@@ -8,11 +8,11 @@ import java.util.Objects;
 @Entity
 public class Producto {
     @Basic
-    @Column(name = "nombreP")
+    @Column(name = "nombrep")
     private String nombreP;
 
     @Id
-    @Column(name = "idPr")
+    @Column(name = "idpr")
     private String idPr;
     @Basic
     @Column(name = "precio")
@@ -23,7 +23,7 @@ public class Producto {
     @OneToMany(mappedBy = "productoByIdProd")
     private Collection<Detalle> detallesByIdPr;
     @ManyToOne
-    @JoinColumns(@JoinColumn(name = "idprod", referencedColumnName = "idP"))
+    @JoinColumn(name = "idprod", referencedColumnName = "idP")
     private Proveedores proveedoresByIdProd;
 
 
@@ -32,6 +32,13 @@ public class Producto {
         this.nombreP=nombreP;
         this.precio=precio;
         this.cant=cant;
+    }
+
+    public Producto() {
+        this.idPr = "";
+        this.nombreP="";
+        this.precio=0.0;
+        this.cant=0;
     }
 
     public String getNombreP() {
