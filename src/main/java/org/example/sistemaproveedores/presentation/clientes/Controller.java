@@ -6,10 +6,7 @@ import org.example.sistemaproveedores.logic.Service;
 import org.springframework.boot.Banner;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -47,6 +44,16 @@ public class Controller {
         model.addAttribute("clientes", service.buscarClientesPorNombreYProveedor(clienteSearch.getNombreC(), proveedor));
 
         return "/Presentation/Clientes/view";
+    }
+
+    @GetMapping("/presentation/Clientes/edit")
+    public String edit(@RequestParam("idC") String idC, Model model, HttpSession session) {
+        Proveedores proveedor = (Proveedores) session.getAttribute("proveedor");
+        Clientes cliente = service.clienteFindByIDyProvedor(idC, proveedor);
+        model.addAttribute("clienteEdit", cliente);
+        session.setAttribute("clienteEdit", cliente);
+
+        return "redirect:/Presentation/Clientes/show";
     }
 
 

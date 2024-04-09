@@ -5,44 +5,104 @@
     <title>Clientes</title>
     <link rel="stylesheet" href="../../../static/css/Menu.css">
     <link rel="stylesheet" href="../../../static/css/styleHeaderFooter.css">
-<!--    <link rel="stylesheet" href="../../../static/css/formTablas.css">-->
-    <link rel="stylesheet" href="../../../static/css/tablaClientes.css">
+    <link rel="stylesheet" href="../../../static/css/productos.css">
 </head>
-<body>
 <div class="header">
     <div>
         <div>
-            <p>Facturación </p> <p>electronica</p></div> <div><img class="logo" src="../../../static/Images/logo.png"></div>
+            <p>Facturación </p> <p>electronica</p></div>
+        <div><img class="logo" src="../../../static/Images/logo.png" alt=""/></div>
     </div>
-    <div>
-        <ul class="Menu">
-            <li>
-                <a href="/presentation/AcercaDe/show">Acerca De</a>
-            </li>
-            <li>
-                <a href="/presentation/Facturar/show">Facturar</a>
-            </li>
-            <li>
-                <a href="/presentation/clientes/show">Clientes</a>
-            </li>
-            <li>
-                <a href="/presentation/Productos/show">Productos</a>
-            </li>
-            <li>
-                <a href="/presentation/Facturas/show">Facturas</a>
-            </li>
-            <li>
-                <a href="/presentation/Usuarios/show">Usuario</a>
-            </li>
-            <li>
-                <a href="/presentation/OUT/OUT">Logout</a>
-            </li>
-        </ul>
+    <ul class="Menu">
+        <li>
+            <a href="/presentation/AcercaDe/show">Acerca De</a>
+        </li>
+        <li>
+            <a href="/presentation/Login/show">Login</a>
+        </li>
+        <li>
+            <a href="/presentation/Facturar/show">Prueba</a>
+        </li>
+
+        <li>
+            <a href="">All view's</a>
+            <ul>
+                <li><a href="" title="-">-></a></li>
+                <li><a href="/presentation/Usuarios/show" title="-">Usuarios</a></li>
+                <li><a href="/presentation/Clientes/show" title="-">Clientes</a></li>
+                <li><a href="/presentation/Productos/show" title="-">Productos</a></li>
+                <li><a href="/presentation/Facturas/show" title="-">Facturas</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<br>
+<div class="all">
+    <div class="productos">
+        <div class="ex_para_overflow">
+            <table>
+                <thead>
+                <tr>
+                    <th>Identificacion</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+                    <th> </th>
+                </tr>
+                </thead>
+                <tr th:each="c: ${clientes}">
+                    <td>
+                        <div th:text="${c.getIdC()}"></div>
+                    </td>
+                    <td>
+                        <div th:text="${c.getNombreC()}"></div>
+                    </td>
+                    <td>
+                        <div th:text="${c.getCorreo()}"></div>
+                    </td>
+                    <td>
+                        <div th:text="${c.getTelefono()}"></div>
+                    </td>
+                    <td>
+                        <a th:href="@{'/presentation/Clientes/edit?idC=' + ${c.getIdC()}}"><img id="editimg" src="../../../static/Images/edit.png"></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="forms">
+            <form class="producto-forms" method="post" th:action="@{/productos/add}">
+                <div>
+                    <h2>Editar</h2>
+                </div>
+                <div class="form-group">
+                    <label for="idPr">ID:</label>
+                    <input type="text" name="idPr" id="idPr" th:value="${proEDIT != null ? proEDIT.getIdPr() : ''}">
+                </div>
+                <div class="form-group">
+                    <label for="nombreP">Nombre:</label>
+                    <input type="text" name="nombreP" id="nombreP" th:value="${proEDIT != null ? proEDIT.getNombreP() : ''}">
+                </div>
+                <div class="form-group">
+                    <label for="precio">Precio:</label>
+                    <input type="number" name="precio" id="precio"  required th:value="${proEDIT != null ? proEDIT.getPrecio() : ''}">
+                </div>
+                <div class="form-group">
+                    <label for="cant">Cantidad:</label>
+                    <input type="number" name="cant" id="cant" required th:value="${proEDIT != null ? proEDIT.getPrecio() : ''}">
+                </div>
+                <button type="submit" >Crear Cliente</button>
+            </form>
+        </div>
     </div>
 </div>
+<footer>
+    facturasOnline@best.team.com
+</footer>
+</html>
 
-<div class="body">
-    <div>
+
+<!--
+<div>
         <table>
             <caption>Clientes</caption>
             <thead>
@@ -103,49 +163,4 @@
 
             </div>
         </form>
-    </div>
-</div>
-
-<div class="footer">
-    <p>Proyecto 1 - Programación Web</p>
-</div>
-
-</body>
-</html>
-
-
-<!--
-<form>
-    &lt;!&ndash;    <p>Clientes</p>
-        <form>
-        <label for="idP"> </label>
-        <input type="text" id="idP" name="idP" placeholder="Type the client ID" required>
-        <button type="submit"></button>
-        </form>&ndash;&gt;
-    <p>Clientes</p>
-    <table>
-        <thead>
-        <tr>
-            <th>Identificacion</th>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Telefono</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr th:r></tr>
-        <tr th:each="cliente : ${clientes}">
-            <td th:text="${cliente.getIdC()}"></td>
-            <td th:text="${cliente.getNombreC()}"></td>
-            <td th:text="${cliente.getCorreo()}"></td>
-            <td th:text="${cliente.getTelefono()}"></td>
-            &lt;!&ndash;<td>
-                <a th:href="@{/presentation/Clientes/edit/{id}(id=${cliente.getId()})}">Editar</a>
-                <a th:href="@{/presentation/Clientes/delete/{id}(id=${cliente.getId()})}">Eliminar</a>
-            </td>&ndash;&gt;
-        </tr>
-        </tbody>
-    </table>
-
-</form>-->
+    </div>-->
