@@ -122,5 +122,9 @@ public class Service {
         productosRepository.save(p);
     }
 
+    public  Iterable<Producto> get_all_productos_de_IDprovedor(String Prob){
+        return productosRepository.get_all_productos_de_IDprovedor(Prob);
+    }
+
 
 }
