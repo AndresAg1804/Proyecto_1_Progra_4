@@ -9,4 +9,5 @@ import org.example.sistemaproveedores.logic.Producto;
 public interface ProductosRepository extends CrudRepository<Producto, String>{
 
     Producto findByIdPrAndProveedoresByIdProd(String idProducto, Proveedores proveedor);
+    //Producto findProductoByProveedoresByIdProd(String idProvedor);
 }

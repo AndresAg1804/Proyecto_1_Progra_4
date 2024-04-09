@@ -2,6 +2,7 @@ package org.example.sistemaproveedores.logic;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +23,7 @@ public class Detalle {
     @ManyToOne
     @JoinColumn(name = "idProd", referencedColumnName = "idPr")
     private Producto productoByIdProd;
+
 
     public int getNumD() {
         return numD;
@@ -75,4 +77,5 @@ public class Detalle {
     public void setProductoByIdProd(Producto productoByIdProd) {
         this.productoByIdProd = productoByIdProd;
     }
+
 }
