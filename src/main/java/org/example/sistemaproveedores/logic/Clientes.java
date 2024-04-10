@@ -8,12 +8,12 @@ import java.util.Objects;
 @Entity
 public class Clientes {
     @Basic
-    @Column(name = "nombreC")
-    private String nombreC;
+    @Column(name = "nombrec") // Changed from "nombreC"
+    private String nombrec;
 
     @Id
-    @Column(name = "idC")
-    private String idC;
+    @Column(name = "idc") // Changed from "idC"
+    private String idc;
     @Basic
     @Column(name = "correo")
     private String correo;
@@ -21,25 +21,26 @@ public class Clientes {
     @Column(name = "telefono")
     private Integer telefono;
     @ManyToOne
-    @JoinColumn(name = "proveedorid", referencedColumnName = "idP")
+    @JoinColumn(name = "proveedorid", referencedColumnName = "idp") // Changed from "idP"
     private Proveedores proveedoresByProveedorid;
     @OneToMany(mappedBy = "clientesByIdCliente")
-    private Collection<Facturas> facturasByIdC;
+    private Collection<Facturas> facturasByIdc;
 
-    public String getNombreC() {
-        return nombreC;
+
+    public String getNombrec() {
+        return nombrec;
     }
 
-    public void setNombreC(String nombreC) {
-        this.nombreC = nombreC;
+    public void setNombrec(String nombrec) {
+        this.nombrec = nombrec;
     }
 
-    public String getIdC() {
-        return idC;
+    public String getIdc() {
+        return idc;
     }
 
-    public void setIdC(String idC) {
-        this.idC = idC;
+    public void setIdc(String idc) {
+        this.idc = idc;
     }
 
     public String getCorreo() {
@@ -63,12 +64,12 @@ public class Clientes {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Clientes clientes = (Clientes) o;
-        return Objects.equals(nombreC, clientes.nombreC) && Objects.equals(idC, clientes.idC) && Objects.equals(correo, clientes.correo) && Objects.equals(telefono, clientes.telefono);
+        return Objects.equals(nombrec, clientes.nombrec) && Objects.equals(idc, clientes.idc) && Objects.equals(correo, clientes.correo) && Objects.equals(telefono, clientes.telefono);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombreC, idC, correo, telefono);
+        return Objects.hash(nombrec, idc, correo, telefono);
     }
 
     public Proveedores getProveedoresByProveedorid() {
@@ -79,11 +80,12 @@ public class Clientes {
         this.proveedoresByProveedorid = proveedoresByProveedorid;
     }
 
-    public Collection<Facturas> getFacturasByIdC() {
-        return facturasByIdC;
+    public Collection<Facturas> getFacturasByIdc() {
+        return facturasByIdc;
     }
 
-    public void setFacturasByIdC(Collection<Facturas> facturasByIdC) {
-        this.facturasByIdC = facturasByIdC;
+    public void setFacturasByIdc(Collection<Facturas> facturasByIdc) {
+        this.facturasByIdc = facturasByIdc;
     }
+
 }

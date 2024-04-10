@@ -9,28 +9,28 @@ import java.util.Objects;
 public class Facturas {
     @Id
     @Column(name = "numfact")
-    private int numFact;
+    private int numfact;
     @Basic
     @Column(name = "total")
     private Integer total;
-    @OneToMany(mappedBy = "facturasByNumFact")
+    @OneToMany(mappedBy = "facturasByNumfact")
     private Collection<Detalle> detallesByNumFact;
     @ManyToOne
-    @JoinColumns(@JoinColumn(name = "idCliente", referencedColumnName = "idC"))
+    @JoinColumns(@JoinColumn(name = "idcliente", referencedColumnName = "idc"))
     private Clientes clientesByIdCliente;
     @ManyToOne
-    @JoinColumns(@JoinColumn(name = "idProveedor", referencedColumnName = "idP"))
+    @JoinColumns(@JoinColumn(name = "idproveedor", referencedColumnName = "idp"))
     private Proveedores proveedoresByIdProveedor;
     @Basic
     @Column(name = "fecha")
     private String fecha;
 
     public int getNumFact() {
-        return numFact;
+        return numfact;
     }
 
-    public void setNumFact(int numFact) {
-        this.numFact = numFact;
+    public void setNumFact(int numfact) {
+        this.numfact = numfact;
     }
 
     public Integer getTotal() {
@@ -46,12 +46,12 @@ public class Facturas {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Facturas facturas = (Facturas) o;
-        return numFact == facturas.numFact && Objects.equals(total, facturas.total);
+        return numfact == facturas.numfact && Objects.equals(total, facturas.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numFact, total);
+        return Objects.hash(numfact, total);
     }
 
     public Collection<Detalle> getDetallesByNumFact() {
@@ -84,5 +84,13 @@ public class Facturas {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public int getNumfact() {
+        return numfact;
+    }
+
+    public void setNumfact(int numfact) {
+        this.numfact = numfact;
     }
 }

@@ -32,18 +32,18 @@ public class Service {
         return clienteRepository.findById(id); 
     }
 
-    public Iterable<Clientes> clienteFindByProveedor(String idProveedor){
-        return clienteRepository.findClientesByProveedor(idProveedor);
+    public Iterable<Clientes> clienteFindByProveedor(String idproveedor){
+        return clienteRepository.findClientesByProveedor(idproveedor);
     }
 
     public Clientes clienteFindByIDyProvedor(String idc, Proveedores proveedores){
-        return clienteRepository.findByIdCAndProveedoresByProveedorid(idc,proveedores);
+        return clienteRepository.findByIdcAndProveedoresByProveedorid(idc,proveedores);
     }
 
-    public void addCliente(String nombreC, String idC, String correo, int telefono, Proveedores proveedor){
+    public void addCliente(String nombrec, String idc, String correo, int telefono, Proveedores proveedor){
         Clientes c=new Clientes();
-        c.setIdC(idC);
-        c.setNombreC(nombreC);
+        c.setIdc(idc);
+        c.setNombrec(nombrec);
         c.setCorreo(correo);
         c.setTelefono(telefono);
         c.setProveedoresByProveedorid(proveedor); //Fijarse que sea correcto
@@ -58,10 +58,10 @@ public class Service {
 
     public Iterable<Producto> get_all_productos_de_user(){return productosRepository.findAll();}
 
-    public Usuarios addUsuario(String usern, String pasw, String tipo,String nombreP,String idP) {
+    public Usuarios addUsuario(String usern, String pasw, String tipo,String nombrep,String idp) {
         Proveedores p=new Proveedores();
-        p.setNombreP(nombreP);
-        p.setIdP(idP);
+        p.setNombreP(nombrep);
+        p.setIdP(idp);
         p.setAprobado((byte) 0);//0=fals 1=true
         proveedorRepository.save(p);
     Usuarios u=new Usuarios();
@@ -100,15 +100,15 @@ public class Service {
     };
 
     //Metodos para facturas
-    public Iterable<Facturas> findFacturasByIdProveedor(Proveedores prov){
-        return facturasRepository.findFacturasByProveedoresByIdProveedor(prov);
+    public Iterable<Facturas> findFacturasByIdProveedor(String idprov){
+        return facturasRepository.findAllByProveedorid(idprov);
     }
 
     //Metodos para productos
     public Producto findProdByIdAndProveedor(String id, Proveedores prov){
-        return productosRepository.findByIdPrAndProveedoresByIdProd(id,prov);
+        return productosRepository.findByIdprAndProveedoresByIdProd(id,prov);
     }
-    public Proveedores get_ProvedorBYID(String id){
+    public Proveedores get_ProvedorBYID(String id){//el id de cada provedor es el username
         return usuarioRepository.findByUsern(id).getProveedoresByIdprov();
     }
     public void addProdcuto(Producto p){
@@ -118,6 +118,10 @@ public class Service {
     public  Iterable<Producto> get_all_productos_de_IDprovedor(String Prob){
         return productosRepository.get_all_productos_de_IDprovedor(Prob);
     }
+    public void updateProducto(String nombrep, double precio, int cantidad, String idpr) {
+        productosRepository.updateProducto(nombrep, precio, cantidad, idpr);
+    }
+
 
     public boolean maximoCant(String nomProd, int cant, Proveedores prov){
         Producto prod=findProdByIdAndProveedor(nomProd, prov);

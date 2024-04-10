@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-@SessionAttributes({"Sfacturas"})
+
 @org.springframework.stereotype.Controller("Factura")
 public class Controller {
 
@@ -21,8 +21,14 @@ public class Controller {
     public String show(Model model, HttpSession session) {
         Usuarios u= (Usuarios) session.getAttribute("usuario");
         Proveedores p= u.getProveedoresByIdprov();
-        Iterable<Facturas> f=service.findFacturasByIdProveedor(p);
-        model.addAttribute("Sfacturas", f);
+        if(session.getAttribute("Sfacturas")!=null){
+            model.addAttribute("Sfacturas", session.getAttribute("Sfacturas"));
+        }
+        else {
+            Iterable<Facturas> f = service.findFacturasByIdProveedor(p.getIdP());
+            session.setAttribute("Sfacturas", f);
+            model.addAttribute("Sfacturas", f);
+        }
         return "/Presentation/Facturas/view";
     }
 

@@ -48,20 +48,20 @@
 <form method="get" action="#" th:action="@{/presentation/Facturar/FindClient}" class="SinTabla">
     <label>Proveedor: </label>
     <label th:text="${session.usuario.getProveedoresByIdprov().getNombreP()}"></label>
-    <label for="nombreC">Cliente</label>
+    <label for="nombrec">Cliente</label>
 
 
     <th:block th:if="${session.cliente!=null}">
     <th:block th:text="${session.cliente.getNombreC()}"></th:block>
     </th:block>
-    <input type="text" id="nombreC" name="nombreC" placeholder="Type the client ID" >
+    <input type="text" id="nombrec" name="nombrec" placeholder="Type the client ID" >
     <button type="submit" ></button>
 </form>
 
 <form id="box2" method="get" action="#" th:action="@{/presentation/Facturar/AddProduct}">
     <p>Productos</p>
-    <label for="idP">Producto: </label>
-    <input type="text" id="idP" name="idP" placeholder="Type the product ID" >
+    <label for="idp">Producto: </label>
+    <input type="text" id="idp" name="idp" placeholder="Type the product ID" >
     <button id="speb" type="submit"></button>
 </form>
 

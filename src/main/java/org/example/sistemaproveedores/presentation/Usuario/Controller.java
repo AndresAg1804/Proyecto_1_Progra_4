@@ -36,8 +36,8 @@ public class Controller {
     public String registrarUsuario(@RequestParam("usern") String usern,
                                    @RequestParam("pasw") String pasw,
                                    @RequestParam("tipo") String tipo,
-                                   @RequestParam("nombreP") String nombreP,
-                                   @RequestParam("idP") String idP,
+                                   @RequestParam("nombrep") String nombreP,
+                                   @RequestParam("idp") String idP,
                                    Model model, HttpSession session) {
         Usuarios u=service.addUsuario(usern,pasw,tipo,nombreP,idP);
         return "index";

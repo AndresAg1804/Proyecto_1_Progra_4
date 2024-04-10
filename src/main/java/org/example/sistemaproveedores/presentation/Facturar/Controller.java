@@ -75,11 +75,11 @@ public class Controller {
         nuevo.setCantidad(1);
 
             detalleP=(ArrayList<Detalle>)session.getAttribute("DetallesVentaS");
-            nuevo.setProductoByIdProd(service.findProdByIdAndProveedor(idProducto,p));
+            nuevo.setProductoByIdprod(service.findProdByIdAndProveedor(idProducto,p));
             //nuevo.setMonto(nuevo.getProductoByIdProd().getPrecio() * nuevo.getCantidad()); //Cambiar el monto en la base de datos a un float
         if(detalleP==null){
             detalleP=new ArrayList<Detalle>();
-            nuevo.setProductoByIdProd(service.findProdByIdAndProveedor(idProducto,p));
+            nuevo.setProductoByIdprod(service.findProdByIdAndProveedor(idProducto,p));
         }
         detalleP.add(nuevo);
         session.setAttribute("DetallesVentaS", detalleP);
@@ -90,7 +90,7 @@ public class Controller {
 @GetMapping("/Facturar/EliminateProduct")
     public String deleteProdFromDetalle(HttpSession session, @RequestParam("idProd") String productID){
         ArrayList<Detalle> detalleP=(ArrayList<Detalle>)session.getAttribute("DetallesVentaS");
-        detalleP.removeIf(detalle -> detalle.getProductoByIdProd().getIdPr().equals(productID));
+        detalleP.removeIf(detalle -> detalle.getProductoByIdprod().getIdPr().equals(productID));
         return "redirect:/presentation/Facturar/show";
     }
 

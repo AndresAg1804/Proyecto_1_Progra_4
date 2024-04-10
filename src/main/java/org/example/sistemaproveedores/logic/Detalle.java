@@ -2,15 +2,14 @@ package org.example.sistemaproveedores.logic;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Detalle {
 
     @Id
-    @Column(name = "numD")
-    private int numD;
+    @Column(name = "numd") // Changed from "numD"
+    private int numd;
     @Basic
     @Column(name = "cantidad")
     private Integer cantidad;
@@ -18,19 +17,19 @@ public class Detalle {
     @Column(name = "monto")
     private Integer monto;
     @ManyToOne
-    @JoinColumn(name = "numFact", referencedColumnName = "numFact")
-    private Facturas facturasByNumFact;
+    @JoinColumn(name = "numfact", referencedColumnName = "numfact") // Changed from "numFact"
+    private Facturas facturasByNumfact;
     @ManyToOne
-    @JoinColumn(name = "idProd", referencedColumnName = "idPr")
-    private Producto productoByIdProd;
+    @JoinColumn(name = "idprod", referencedColumnName = "idpr") // Changed from "idProd"
+    private Producto productoByIdprod;
 
 
-    public int getNumD() {
-        return numD;
+    public int getNumd() {
+        return numd;
     }
 
-    public void setNumD(int numD) {
-        this.numD = numD;
+    public void setNumd(int numd) {
+        this.numd = numd;
     }
 
     public Integer getCantidad() {
@@ -54,28 +53,28 @@ public class Detalle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Detalle detalle = (Detalle) o;
-        return numD == detalle.numD && Objects.equals(cantidad, detalle.cantidad) && Objects.equals(monto, detalle.monto);
+        return numd == detalle.numd && Objects.equals(cantidad, detalle.cantidad) && Objects.equals(monto, detalle.monto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numD, cantidad, monto);
+        return Objects.hash(numd, cantidad, monto);
     }
 
-    public Facturas getFacturasByNumFact() {
-        return facturasByNumFact;
+    public Facturas getFacturasByNumfact() {
+        return facturasByNumfact;
     }
 
-    public void setFacturasByNumFact(Facturas facturasByNumFact) {
-        this.facturasByNumFact = facturasByNumFact;
+    public void setFacturasByNumfact(Facturas facturasByNumfact) {
+        this.facturasByNumfact = facturasByNumfact;
     }
 
-    public Producto getProductoByIdProd() {
-        return productoByIdProd;
+    public Producto getProductoByIdprod() {
+        return productoByIdprod;
     }
 
-    public void setProductoByIdProd(Producto productoByIdProd) {
-        this.productoByIdProd = productoByIdProd;
+    public void setProductoByIdprod(Producto productoByIdprod) {
+        this.productoByIdprod = productoByIdprod;
     }
 
 }

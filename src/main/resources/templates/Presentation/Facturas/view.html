@@ -46,8 +46,8 @@
         <tr> <th>Num Factura</th><th>Cliente</th> <th>Proveedor</th> <th>Monto</th> </tr>
         <tr th:each="u: ${Sfacturas}">
             <td th:text="${u.getNumFact()}"/>
-            <td th:text="${u.getClientesByIdCliente().getNombreC()}"/>
-            <td th:text="${u.getProveedoresByIdProveedor().getNombreP()}"/>
+            <td th:text="${u.getClientesByIdCliente().getNombrec()}"/>
+            <td th:text="${u.getProveedoresByIdProveedor().getNombrep()}"/>
             <td th:text="${u.getTotal()}"/>
 
         </tr>

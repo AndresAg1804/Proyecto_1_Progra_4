@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface ClienteRepository extends CrudRepository<Clientes, String> {
 
-    @Query("select c from Clientes c where c.proveedoresByProveedorid.idP=?1")
-    List<Clientes> findClientesByProveedor(String idProveedor);
+    @Query("select c from Clientes c where c.proveedoresByProveedorid.idp=?1")
+    List<Clientes> findClientesByProveedor(String idproveedor);
 
-    Clientes findByIdCAndProveedoresByProveedorid(String idC, Proveedores proveedores);
+    Clientes findByIdcAndProveedoresByProveedorid(String idc, Proveedores proveedores);
 
 }

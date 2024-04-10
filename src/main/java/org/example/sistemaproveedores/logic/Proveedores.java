@@ -8,12 +8,12 @@ import java.util.Objects;
 @Entity
 public class Proveedores {
     @Basic
-    @Column(name = "nombreP")
-    private String nombreP;
+    @Column(name = "nombrep")
+    private String nombrep;
 
     @Id
-    @Column(name = "idP")
-    private String idP;
+    @Column(name = "idp")
+    private String idp;
     @Basic
     @Column(name = "aprobado")
     private Byte aprobado;
@@ -26,20 +26,21 @@ public class Proveedores {
     @OneToMany(mappedBy = "proveedoresByIdprov")
     private Collection<Usuarios> usuariosByIdP;
 
+
     public String getNombreP() {
-        return nombreP;
+        return nombrep;
     }
 
     public void setNombreP(String nombreP) {
-        this.nombreP = nombreP;
+        this.nombrep = nombreP;
     }
 
     public String getIdP() {
-        return idP;
+        return idp;
     }
 
     public void setIdP(String idP) {
-        this.idP = idP;
+        this.idp = idP;
     }
 
     public Byte getAprobado() {
@@ -55,12 +56,12 @@ public class Proveedores {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Proveedores that = (Proveedores) o;
-        return Objects.equals(nombreP, that.nombreP) && Objects.equals(idP, that.idP) && Objects.equals(aprobado, that.aprobado);
+        return Objects.equals(nombrep, that.nombrep) && Objects.equals(idp, that.idp) && Objects.equals(aprobado, that.aprobado);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombreP, idP, aprobado);
+        return Objects.hash(nombrep, idp, aprobado);
     }
 
     public Collection<Clientes> getClientesByIdP() {
@@ -93,5 +94,21 @@ public class Proveedores {
 
     public void setUsuariosByIdP(Collection<Usuarios> usuariosByIdP) {
         this.usuariosByIdP = usuariosByIdP;
+    }
+
+    public String getNombrep() {
+        return nombrep;
+    }
+
+    public void setNombrep(String nombrep) {
+        this.nombrep = nombrep;
+    }
+
+    public String getIdp() {
+        return idp;
+    }
+
+    public void setIdp(String idp) {
+        this.idp = idp;
     }
 }

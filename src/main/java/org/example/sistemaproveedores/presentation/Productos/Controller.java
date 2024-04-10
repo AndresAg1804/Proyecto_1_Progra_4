@@ -36,34 +36,41 @@ public class Controller {
         return "/Presentation/Productos/view";
     }
     @GetMapping("/set/editpro") //por mas que modifique los <a> solo pueden ser GetMapping
-    public String editarPRO(@RequestParam("idPr")String idPr,
-                            @RequestParam("nombreP")String nombreP,
+    public String editarPRO(@RequestParam("idpr")String idpr,
+                            @RequestParam("nombrep")String nombrep,
                             @RequestParam("precio")Double precio,
                             @RequestParam("cant")Integer cant,
                             Model model, HttpSession session){
 
-        //Hotel h=(Hotel)model.getAttribute("hotel");
-        //Hotel hdos=service.findById(h.getId());
-        //metodos de service para hacer el update
 
-        Producto pp=new Producto(idPr,nombreP,precio,cant);
-        session.setAttribute("proEDIT", pp);
-        model.addAttribute("proEDIT",pp);
+        Producto p=new Producto(idpr,nombrep,precio,cant);
+        session.setAttribute("proEDIT", p);
+        model.addAttribute("proEDIT",p);
         return "redirect:/presentation/Productos/show";
     }
     @PostMapping("/productos/add")
-    public String appPRO(@RequestParam("idPr") String idPr,
-                         @RequestParam("nombreP") String nombreP,
+    public String appPRO(@RequestParam("idpr") String idpr,
+                         @RequestParam("nombrep") String nombrep,
                          @RequestParam("precio") Double precio,
                          @RequestParam("cant")Integer cant,
                          Model model, HttpSession session){
-        Producto p=new Producto(idPr,nombreP,precio,cant);
-        Usuarios u=(Usuarios) session.getAttribute("usuario");
+        Producto producto=new Producto(idpr,nombrep,precio,cant);
 
-        p.setProveedoresByIdProd(service.get_ProvedorBYID(u.getUsern()));
-        service.addProdcuto(p);
-        session.setAttribute("proEDIT", null);
-        model.addAttribute("proEDIT",null);
+        Usuarios u=(Usuarios) session.getAttribute("usuario");
+        Proveedores prove =u.getProveedoresByIdprov();
+        producto.setProveedoresByIdProd(service.get_ProvedorBYID(u.getUsern()));
+
+        if(model.getAttribute("proEDIT")!=null){
+            service.updateProducto( nombrep,  precio,  cant, idpr);
+            session.setAttribute("proEDIT", null);
+            model.addAttribute("proEDIT", null);
+        }
+        else {
+            //porque el ID DE cada Provedor es el Username
+            service.addProdcuto(producto);
+            session.setAttribute("proEDIT", null);
+            model.addAttribute("proEDIT", null);
+        }
         return "redirect:/presentation/Productos/show";
     }
 
