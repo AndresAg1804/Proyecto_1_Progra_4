@@ -104,8 +104,8 @@ public class Service {
     };
 
     //Metodos para facturas
-    public Iterable<Facturas> findFacturasByIdProveedor(Proveedores prov){
-        return facturasRepository.findFacturasByProveedoresByIdProveedor(prov);
+    public Iterable<Facturas> findFacturasByIdProveedor(String prov){
+        return facturasRepository.findAllByProveedorId(prov);
     }
 
     //Metodos para productos
@@ -177,6 +177,9 @@ public class Service {
         for(Detalle det : lista){
 
         }
+    }
+    public void updateProducto(String nombrep, double precio, int cantidad, String idpr) {
+        productosRepository.updateProducto(nombrep, precio, cantidad, idpr);
     }
 
 }
