@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../../static/css/formTablas.css">
     <link rel="stylesheet" href="../../../static/css/styleHeaderFooter.css">
     <link rel="stylesheet" href="../../../static/css/Table.css">
+    <link rel="stylesheet" href="../../../static/css/specialFacturar.css">
 
 
 </head>
@@ -61,10 +62,10 @@
     <p>Productos</p>
     <label for="idP">Producto: </label>
     <input type="text" id="idP" name="idP" placeholder="Type the product ID" >
-    <button type="submit"></button>
+    <button id="speb" type="submit"></button>
 </form>
 
-<div id="box3">
+<div id="boxspe">
     <p>Productos</p>
     <table>
         <thead>
@@ -74,19 +75,24 @@
             <th>Producto</th>
             <th>Precio</th>
             <th>Monto</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="det: ${session.DetallesVentaS}">
-            <td></td>
+            <td><a th:href="@{/Facturar/EliminateProduct(idProd=${det.getProductoByIdProd().getIdPr()})}"><img src="../../../static/Images/xSymbol.png"/></a></td>
             <td th:text="${det.getCantidad()}"></td>
             <td th:text="${det.getProductoByIdProd().getNombreP()}"></td>
             <td th:text="${det.getProductoByIdProd().getPrecio()}"></td>
             <td th:text="${det.getMonto()}"></td>
+            <td><a><img id="up" src="../../../static/Images/UpArrow.png"/></a></td>
+            <td><a><img id="down" src="../../../static/Images/DownArrow.png"/></a></td>
         </tr>
 
         </tbody>
     </table>
+    <a><button>Finalizar compra</button></a>
 </div>
 
 <div>

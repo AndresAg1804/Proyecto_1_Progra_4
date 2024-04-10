@@ -14,6 +14,8 @@ form, #box2, #box3{
     width: 800px;
 }
 
+
+
 #box2:first-child, #box3:first-child{
     margin-top:50px;
     display:block;
@@ -60,11 +62,13 @@ form button{
 }
 
 #up{
-    background-image: url(/static/Images/UpArrow.png);
+    width: 40px;
+    height: 40px;
 }
 
 #down{
-    background-image: url(/static/Images/DownArrow.png);
+    width: 40px;
+    height: 40px;
 }
 
 form button:hover {
