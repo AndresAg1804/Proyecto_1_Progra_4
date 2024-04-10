@@ -86,8 +86,8 @@
             <td th:text="${det.getProductoByIdProd().getNombreP()}"></td>
             <td th:text="${det.getProductoByIdProd().getPrecio()}"></td>
             <td th:text="${det.getMonto()}"></td>
-            <td><a><img id="up" src="../../../static/Images/UpArrow.png"/></a></td>
-            <td><a><img id="down" src="../../../static/Images/DownArrow.png"/></a></td>
+            <td><a th:href="@{/Facturar/AumentarCant(idprod=${det.getProductoByIdProd().getIdPr()}, cant=${det.getCantidad()})}"><img id="up" src="../../../static/Images/UpArrow.png"/></a></td>
+            <td><a th:href="@{/Facturar/DisminuirCant(idprod=${det.getProductoByIdProd().getIdPr()}, cant=${det.getCantidad()})}"><img id="down" src="../../../static/Images/DownArrow.png"/></a></td>
         </tr>
 
         </tbody>
