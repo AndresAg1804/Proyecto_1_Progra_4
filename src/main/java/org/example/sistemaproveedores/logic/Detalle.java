@@ -18,10 +18,10 @@ public class Detalle {
     @Column(name = "monto")
     private Integer monto;
     @ManyToOne
-    @JoinColumn(name = "numFact", referencedColumnName = "numFact")
+    @JoinColumn(name = "numfact", referencedColumnName = "numfact")
     private Facturas facturasByNumFact;
     @ManyToOne
-    @JoinColumn(name = "idProd", referencedColumnName = "idPr")
+    @JoinColumn(name = "idprod", referencedColumnName = "idPr")
     private Producto productoByIdProd;
 
 

@@ -181,5 +181,12 @@ public class Service {
     public void updateProducto(String nombrep, double precio, int cantidad, String idpr) {
         productosRepository.updateProducto(nombrep, precio, cantidad, idpr);
     }
+    public Facturas get_FacturaXid(int numfact) {
+        return facturasRepository.getFacturasByNumFact(numfact);
+    }
+
+    public Iterable<Detalle> findDetallesByFacturaNumFact(int  numf){
+        return facturasRepository.findDetallesByFacturaNumFact(numf);
+    }
 
 }
