@@ -119,5 +119,9 @@ public class Service {
         return productosRepository.get_all_productos_de_IDprovedor(Prob);
     }
 
+    public boolean maximoCant(String nomProd, int cant, Proveedores prov){
+        Producto prod=findProdByIdAndProveedor(nomProd, prov);
+        return prod.getCant() < cant;
+    }
 
 }

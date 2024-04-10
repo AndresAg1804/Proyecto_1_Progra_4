@@ -17,4 +17,5 @@ public interface ProductosRepository extends CrudRepository<Producto, String>{
     @Query("select p from Producto p where p.proveedoresByIdProd.idP=?1")
     List<Producto> get_all_productos_de_IDprovedor(String idProveedor);
 
+
 }
