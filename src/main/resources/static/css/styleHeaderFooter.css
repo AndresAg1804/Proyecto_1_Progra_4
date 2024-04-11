@@ -47,3 +47,24 @@ footer{
     justify-content: center;
 }
 
+.lupa{
+    width: 150px;
+    border-radius: 50%;
+}
+
+#special{
+    display:block;
+    margin-top: 10px;
+    overflow-y: auto;
+    max-height: 600px;
+}
+
+body{
+    overflow-y: auto;
+    max-height: 90%;
+}
+
+#special form{
+    margin-top: 10px;
+}
+
