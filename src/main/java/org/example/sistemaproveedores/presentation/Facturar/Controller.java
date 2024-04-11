@@ -70,7 +70,7 @@ public class Controller {
         return "redirect:/presentation/Facturar/show";
     }
     @GetMapping ("/presentation/Facturar/AddProduct")
-    public String findProducto(HttpSession session, @RequestParam("idP") @Valid String idProducto) {
+    public String findProducto(@RequestParam("idP") @Valid String idProducto,HttpSession session) {
 
         Usuarios u = (Usuarios) session.getAttribute("usuario");
         Proveedores p = u.getProveedoresByIdprov();
