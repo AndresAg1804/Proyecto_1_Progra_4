@@ -157,7 +157,7 @@ form button {
     height: 10%;
     horiz-align: center;
 }
-#editimg{
+.editimg{
     width: 50px; /* Set the desired width */
     height: 50px;
 }
