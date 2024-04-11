@@ -2,11 +2,7 @@ package org.example.sistemaproveedores.logic;
 
 
 import ch.qos.logback.core.net.server.Client;
-import org.example.sistemaproveedores.data.ClienteRepository;
-import org.example.sistemaproveedores.data.ProveedorRepository;
-import org.example.sistemaproveedores.data.facturasRepository;
-import org.example.sistemaproveedores.data.usuariosRepository;
-import org.example.sistemaproveedores.data.ProductosRepository;
+import org.example.sistemaproveedores.data.*;
 import org.springframework.beans.factory.annotation.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,6 +25,8 @@ public class Service {
     private facturasRepository facturasRepository;
     @Autowired
     private ProductosRepository productosRepository;
+@Autowired
+    private DetalleRepository detalleRepository;
 
     //Metodos para clientes
     public Iterable<Clientes> clienteFindAll(){
@@ -173,19 +171,29 @@ public class Service {
 
     public void guardarFactura(Facturas fact, ArrayList<Detalle> lista){
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy 'at' hh:mm:ss a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d");
         String formattedDate = now.format(formatter);
         fact.setFecha(formattedDate);
         int tot=0;
         for(Detalle det : lista){
             tot+=det.getMonto();
-        }
-        fact.setTotal(tot);
-        String idFact= String.valueOf(facturasRepository.save(fact));
-        for(Detalle det : lista){
 
         }
-    }
+        fact.setTotal(tot);
+        facturasRepository.save(fact);
+        List<Facturas> listF = facturasRepository.findAllByProveedorId(fact.getProveedoresByIdProveedor().getIdP());
+        Facturas factura = listF.getLast();
+
+        for(Detalle det : lista) {
+            int i = detalleRepository.findAll().size() + 1;
+            det.setFacturasByNumFact(factura);
+            det.setNumD(i);
+            detalleRepository.save(det);
+            Producto prod = det.getProductoByIdProd();
+            prod.setCant(prod.getCant() - det.getCantidad());
+            productosRepository.updateProducto(prod.getNombreP(), prod.getPrecio(), prod.getCant(), prod.getIdPr());
+            }
+        }
     public void updateProducto(String nombrep, double precio, int cantidad, String idpr) {
         productosRepository.updateProducto(nombrep, precio, cantidad, idpr);
     }
