@@ -58,6 +58,7 @@
     <button type="submit" ></button>
 </form>
 
+
 <form id="box2" method="get" action="#" th:action="@{/presentation/Facturar/AddProduct}">
     <p>Productos</p>
     <label for="idP">Producto: </label>
@@ -92,7 +93,7 @@
 
         </tbody>
     </table>
-    <a><button>Finalizar compra</button></a>
+    <a th:href="@{/Facturar/Guardar}"><button>Finalizar compra</button></a>
 </div>
 
 <div>
