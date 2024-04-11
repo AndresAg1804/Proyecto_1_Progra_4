@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.thymeleaf.context.Context;
@@ -39,14 +40,18 @@ public class Controller {
     public String show(Model model, HttpSession session) {
         Usuarios u= (Usuarios) session.getAttribute("usuario");
         Proveedores p= u.getProveedoresByIdprov();
-        if(session.getAttribute("Sfacturas")!=null){
-            model.addAttribute("Sfacturas", session.getAttribute("Sfacturas"));
+
+        if(session.getAttribute("factura_BUSQUEDA")!=null){
+            model.addAttribute("Sfacturas", session.getAttribute("factura_BUSQUEDA"));
+            session.setAttribute("factura_BUSQUEDA",null);
         }
         else {
             Iterable<Facturas> f = service.findFacturasByIdProveedor(p.getIdP());
             session.setAttribute("Sfacturas", f);
             model.addAttribute("Sfacturas", f);
         }
+
+
         return "/Presentation/Facturas/view";
     }
     @GetMapping("/Facturas/pdf")
@@ -83,29 +88,29 @@ public class Controller {
             document.add(new Paragraph( "Proveedor: " + (facturas.getProveedoresByIdProveedor().getNombreP())));
 
             // Add invoice details to the table
-            Iterable<Detalle> detallesFactura = service.findDetallesByFacturaNumFact(numFact);
+        Iterable<Detalle> detallesFactura = service.findDetallesByFacturaNumFact(numFact);
             for (Detalle detalle : detallesFactura) {
-                Producto producto = (detalle.getProductoByIdProd());  // Store product details in a variable
-                table.addCell(new Paragraph( producto.getIdPr()));
-                table.addCell(new Paragraph(producto.getNombreP()));
-                table.addCell(new Paragraph(String.valueOf(producto.getPrecio())));
-                table.addCell(new Paragraph( String.valueOf(detalle.getCantidad())));
-                table.addCell(new Paragraph( String.valueOf(detalle.getMonto())));
-            }
+        Producto producto = (detalle.getProductoByIdProd());  // Store product details in a variable
+        table.addCell(new Paragraph( producto.getIdPr()));
+        table.addCell(new Paragraph(producto.getNombreP()));
+        table.addCell(new Paragraph(String.valueOf(producto.getPrecio())));
+        table.addCell(new Paragraph( String.valueOf(detalle.getCantidad())));
+        table.addCell(new Paragraph( String.valueOf(detalle.getMonto())));
+         }
 
-            // Add the table to the document
+    // Add the table to the document
             document.add(table);
 
-            // Add total to the right of the document
+    // Add total to the right of the document
             Paragraph total = new Paragraph("Total: " + facturas.getTotal());
             total.setTextAlignment(TextAlignment.RIGHT);
             document.add(total);
 
-            // Close the document
+    // Close the document
             document.close();
         } catch (Exception e) {
-            // Handle potential exceptions during PDF generation
-            e.printStackTrace();
+        // Handle potential exceptions during PDF generation
+        e.printStackTrace();
         }
     }
     @GetMapping("/Facturas/xml")
@@ -116,7 +121,7 @@ public class Controller {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
         resolver.setApplicationContext(new AnnotationConfigApplicationContext());
         resolver.setPrefix("classpath:/templates/");
-        resolver.setSuffix(" .xml");
+        resolver.setSuffix(".xml");
         resolver.setCharacterEncoding ("UTF-8");
         resolver.setTemplateMode (TemplateMode. XML) ;
         SpringTemplateEngine engine = new SpringTemplateEngine();
@@ -127,10 +132,21 @@ public class Controller {
         ctx.setVariable("totalFactura", totalFactura);
         String xml = engine.process( "Presentation/Facturas/XmlView", ctx);
         response.setContentType("application/xml");
-        response.setHeader ( "Content-Disposition","attachment; filename=factura" + numFact + ".xml");
+        //response.setHeader ( "Content-Disposition","attachment; filename=factura" + numFact + ".xml");
         PrintWriter writer= response.getWriter();
         writer.print(xml);
         writer.close();
+    }
+    @PostMapping("/factura/buscar")
+    public String buscPro(@RequestParam("numFact") String numFact,Model model, HttpSession session){
+        if(numFact==""){
+
+            return "redirect:/presentation/Facturas/show";
+        }
+        Usuarios u=(Usuarios) session.getAttribute("usuario");
+        session.setAttribute("factura_BUSQUEDA", service.findAllByIdProveedorAndNumFact(u.getProveedoresByIdprov().getIdP(),Integer.parseInt(numFact)));
+        model.addAttribute("factura_BUSQUEDA", session.getAttribute("factura_BUSQUEDA"));
+        return "redirect:/presentation/Facturas/show";
     }
 
 }

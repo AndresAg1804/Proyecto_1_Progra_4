@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FacturacionElectronica>
-    <Clave>5062626216710764276047640760427642704276216712067241</Clave>
-    <CodigoActividad>851202</CodigoActividad>
-    <NumeroConsecutivo>00100001000100101832</NumeroConsecutivo>
+    <Clave>456654546423131354898754132165849843516548413621879887131847</Clave>
+    <CodigoActividad>123488112</CodigoActividad>
+    <NumeroConsecutivo>0001112220003330002222</NumeroConsecutivo>
     <FechaEmision th:text="${facturaXml.getFecha()}"/>
     <Emisor>
         <Nombre th:text="${facturaXml.getProveedoresByIdProveedor().getNombreP()}"/>

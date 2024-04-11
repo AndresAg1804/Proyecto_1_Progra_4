@@ -42,6 +42,15 @@
     <div class="productos">
         <div class="ex_para_overflow">
             <table>
+                <tr>
+                    <form class="producto-buscar" method="post" th:action="@{/factura/buscar}">
+                        <div class="form-group-buscar">
+                            <label for="Numfact">Numfact:</label>
+                            <input type="text" name="numFact" id="Numfact" value="">
+                            <button type="submit" >Buscar</button>
+                        </div>
+                    </form>
+                </tr>
                 <tr> <th>Num Factura</th><th>Cliente</th> <th>Proveedor</th> <th>Monto</th> <th> PDF/XML</th></tr>
                 <tr th:each="u: ${Sfacturas}">
                     <td th:text="${u.getNumFact()}"/>
