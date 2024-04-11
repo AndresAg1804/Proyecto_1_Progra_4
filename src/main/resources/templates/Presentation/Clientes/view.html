@@ -104,10 +104,10 @@
                         </div>
                     </div>
                 </th:block>
-                <th:block th:unless="${mode==0}">
+                <th:block th:if="${mode!=0}">
                     <div class="form-group">
                         <label>ID:</label>
-                        <input type="text" th:value="*{idC}" readonly>
+                        <input type="text" th:value="*{idC}" readonly="readonly">
                     </div>
                 </th:block>
                 <div class="form-group">
