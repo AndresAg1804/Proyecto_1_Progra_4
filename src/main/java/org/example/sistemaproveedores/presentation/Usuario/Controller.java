@@ -55,7 +55,7 @@ public class Controller {
                         case "PRO": {
                             if(ulog.getProveedoresByIdprov().getAprobado().equals((byte)1)){
                                 session.setAttribute("usuario", ulog);
-                                return "redirect:/presentation/Usuarios/show";
+                                return "redirect:/presentation/Facturar/show";
                             }
                             else{
                                 return "index";
