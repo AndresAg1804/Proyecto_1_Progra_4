@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -33,6 +34,7 @@ public class Controller {
             clienteP=new Clientes();
         }
         session.setAttribute("cliente", clienteP);
+
 
 
         detalleP=(ArrayList<Detalle>)session.getAttribute("DetallesVentaS");
@@ -68,7 +70,7 @@ public class Controller {
         return "redirect:/presentation/Facturar/show";
     }
     @GetMapping ("/presentation/Facturar/AddProduct")
-    public String findProducto(HttpSession session, @RequestParam("idP") String idProducto) {
+    public String findProducto(HttpSession session, @RequestParam("idP") @Valid String idProducto) {
 
         Usuarios u = (Usuarios) session.getAttribute("usuario");
         Proveedores p = u.getProveedoresByIdprov();
@@ -78,7 +80,7 @@ public class Controller {
         Producto prod = service.findProdByIdAndProveedor(idProducto,p);
         int monto = 0;
             detalleP=(ArrayList<Detalle>)session.getAttribute("DetallesVentaS");
-        if(!service.alreadyInList(detalleP, idProducto )&& prod!=null){
+        if(!service.alreadyInList(detalleP, idProducto )&& prod!=null && prod.getCant()>0){
             nuevo.setProductoByIdProd(prod);
             monto= (int) (nuevo.getProductoByIdProd().getPrecio() * nuevo.getCantidad()); //Cambiar el monto en la base de datos a un float
             nuevo.setMonto(monto);
@@ -89,6 +91,7 @@ public class Controller {
         detalleP.add(nuevo);
         session.setAttribute("DetallesVentaS", detalleP);
         }
+
         return "redirect:/presentation/Facturar/show";
     }
 
@@ -97,6 +100,9 @@ public class Controller {
     public String deleteProdFromDetalle(HttpSession session, @RequestParam("idProd") String productID){
         ArrayList<Detalle> detalleP=(ArrayList<Detalle>)session.getAttribute("DetallesVentaS");
         detalleP.removeIf(detalle -> detalle.getProductoByIdProd().getIdPr().equals(productID));
+        if(detalleP.size()==0){
+            session.setAttribute("estado","0");
+        }
         return "redirect:/presentation/Facturar/show";
     }
 
@@ -121,6 +127,20 @@ public class Controller {
         detalleP=service.actualizaLista(detalleP,idprod,cant,p, 2);
 
         session.setAttribute("DetallesVentaS", detalleP);
+        return "redirect:/presentation/Facturar/show";
+    }
+
+    @GetMapping("/Facturar/Guardar")
+    public String guardarFactura(HttpSession session){
+        ArrayList<Detalle> detalleP=(ArrayList<Detalle>)session.getAttribute("DetallesVentaS");
+        Facturas fact= (Facturas) session.getAttribute("factura");
+        Clientes cliente = (Clientes) session.getAttribute("cliente");
+        if(detalleP.size()>0 && cliente.getNombreC()!=null) {
+            service.guardarFactura(fact, detalleP);
+            session.setAttribute("cliente", null);
+            session.setAttribute("DetallesVentaS", null);
+            session.setAttribute("factura", null);
+        }
         return "redirect:/presentation/Facturar/show";
     }
 }
