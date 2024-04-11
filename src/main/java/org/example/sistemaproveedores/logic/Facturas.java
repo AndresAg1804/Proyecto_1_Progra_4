@@ -16,10 +16,10 @@ public class Facturas {
     @OneToMany(mappedBy = "facturasByNumFact")
     private Collection<Detalle> detallesByNumFact;
     @ManyToOne
-    @JoinColumns(@JoinColumn(name = "idCliente", referencedColumnName = "idC"))
+    @JoinColumns(@JoinColumn(name = "idcliente", referencedColumnName = "idC"))//aqui cambio jp
     private Clientes clientesByIdCliente;
     @ManyToOne
-    @JoinColumns(@JoinColumn(name = "idProveedor", referencedColumnName = "idP"))
+    @JoinColumns(@JoinColumn(name = "idproveedor", referencedColumnName = "idP"))//aqui cambio jp
     private Proveedores proveedoresByIdProveedor;
     @Basic
     @Column(name = "fecha")

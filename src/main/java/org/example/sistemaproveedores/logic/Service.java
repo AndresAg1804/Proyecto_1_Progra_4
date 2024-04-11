@@ -8,8 +8,12 @@ import org.example.sistemaproveedores.data.facturasRepository;
 import org.example.sistemaproveedores.data.usuariosRepository;
 import org.example.sistemaproveedores.data.ProductosRepository;
 import org.springframework.beans.factory.annotation.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 @org.springframework.stereotype.Service("service")
@@ -107,8 +111,8 @@ public class Service {
     };
 
     //Metodos para facturas
-    public Iterable<Facturas> findFacturasByIdProveedor(Proveedores prov){
-        return facturasRepository.findFacturasByProveedoresByIdProveedor(prov);
+    public Iterable<Facturas> findFacturasByIdProveedor(String prov){
+        return facturasRepository.findAllByProveedorId(prov);
     }
 
     //Metodos para productos
@@ -126,5 +130,63 @@ public class Service {
         return productosRepository.get_all_productos_de_IDprovedor(Prob);
     }
 
+
+    public ArrayList<Detalle> actualizaLista(ArrayList<Detalle> lista, String idProducto, int cant, Proveedores proveedor, int modo){ //modo 1 es para verificar que
+        //no aumente más de lo permitido y modo 2 para que no disminuya más de lo permitido
+        Producto prod=findProdByIdAndProveedor(idProducto, proveedor);
+        int monto=0;
+        if(modo==1){
+            if(prod.getCant()>=cant){
+                for(Detalle det : lista){
+                    if(Objects.equals(det.getProductoByIdProd().getIdPr(), idProducto)){
+                        det.setCantidad(cant);
+                       monto= (int) (det.getProductoByIdProd().getPrecio() * det.getCantidad());
+                       det.setMonto(monto);
+                    }
+                }
+            }
+        }
+        else {
+            if(cant>=1){
+                for(Detalle det : lista){
+                    if(Objects.equals(det.getProductoByIdProd().getIdPr(), idProducto)){
+                        det.setCantidad(cant);
+                        monto= (int) (det.getProductoByIdProd().getPrecio() * det.getCantidad());
+                        det.setMonto(monto);
+                    }
+                }
+            }
+        }
+
+        return lista;
+    }
+
+    public boolean alreadyInList(ArrayList<Detalle> lista, String prod){
+        for(Detalle det : lista){
+            if(Objects.equals(det.getProductoByIdProd().getIdPr(), prod)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void guardarFactura(Facturas fact, ArrayList<Detalle> lista){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy 'at' hh:mm:ss a");
+        String formattedDate = now.format(formatter);
+        fact.setFecha(formattedDate);
+        int tot=0;
+        for(Detalle det : lista){
+            tot+=det.getMonto();
+        }
+        fact.setTotal(tot);
+        String idFact= String.valueOf(facturasRepository.save(fact));
+        for(Detalle det : lista){
+
+        }
+    }
+    public void updateProducto(String nombrep, double precio, int cantidad, String idpr) {
+        productosRepository.updateProducto(nombrep, precio, cantidad, idpr);
+    }
 
 }
