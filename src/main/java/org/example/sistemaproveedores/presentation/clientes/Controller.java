@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.example.sistemaproveedores.logic.Clientes;
 import org.example.sistemaproveedores.logic.Proveedores;
 import org.example.sistemaproveedores.logic.Service;
+import org.example.sistemaproveedores.logic.Usuarios;
 import org.springframework.boot.Banner;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,8 @@ public class Controller {
 
     @GetMapping("/presentation/Clientes/show")
     public String show(Model model, HttpSession session) {
-        Proveedores proveedor = (Proveedores) session.getAttribute("proveedor");
+        Usuarios usuario = (Usuarios) session.getAttribute("usuario");
+        Proveedores proveedor = usuario.getProveedoresByIdprov();
         model.addAttribute("clientes", service.clienteFindByProveedor(proveedor.getIdP()));
         return "/Presentation/Clientes/view";
     }
@@ -43,20 +45,26 @@ public class Controller {
             @ModelAttribute("clienteSearch") Clientes clienteSearch,
             HttpSession session,
             Model model) {
-        Proveedores proveedor = (Proveedores) session.getAttribute("proveedor");
-        model.addAttribute("clientes", service.buscarClientesPorNombreYProveedor(clienteSearch.getNombreC(), proveedor));
-
+        Usuarios u=(Usuarios) session.getAttribute("usuario");
+        Proveedores proveedor =u.getProveedoresByIdprov();
+        if(clienteSearch.getNombreC().isEmpty()){
+            model.addAttribute("clientes", service.clienteFindByProveedor(proveedor.getIdP()));
+        }
+        else {
+            model.addAttribute("clientes", service.buscarClientesPorNombreYProveedor(clienteSearch.getNombreC(), proveedor));
+        }
         return "/Presentation/Clientes/view";
     }
 
     @GetMapping("/presentation/Clientes/edit")
     public String edit(@RequestParam("idC") String idC, Model model, HttpSession session) {
-        Proveedores proveedor = (Proveedores) session.getAttribute("proveedor");
+        Usuarios u=(Usuarios) session.getAttribute("usuario");
+        Proveedores proveedor =u.getProveedoresByIdprov();
         Clientes cliente = service.clienteFindByIDyProvedor(idC, proveedor);
         model.addAttribute("clienteEdit", cliente);
         session.setAttribute("clienteEdit", cliente);
         session.setAttribute("mode", 1);
-        return "redirect:/Presentation/Clientes/show";
+        return "redirect:/presentation/Clientes/show";
     }
 
     @PostMapping("/presentation/Clientes/save")
@@ -66,9 +74,10 @@ public class Controller {
         if (result.hasErrors()) {
             return "/Presentation/Clientes/view";
         }
-        Proveedores proveedor = (Proveedores) session.getAttribute("proveedor");
+        Usuarios u=(Usuarios) session.getAttribute("usuario");
+        Proveedores proveedor =u.getProveedoresByIdprov();
         if (mode == 0) {
-            clienteEdit.setProveedoresByProveedorid(proveedor);
+            clienteEdit.setProveedoresByProveedorid(service.get_ProvedorBYID(u.getUsern()));
             if(service.clienteFindByIDyProvedor(clienteEdit.getIdC(), proveedor) == null) {
                 service.addCliente(clienteEdit);
                 session.setAttribute("clienteEdit", new Clientes());
@@ -81,7 +90,7 @@ public class Controller {
             model.addAttribute("clienteEdit", new Clientes());
             session.setAttribute("mode", 0);
         }
-        return "redirect:/Presentation/Clientes/show";
+        return "redirect:/presentation/Clientes/show";
     }
 
 

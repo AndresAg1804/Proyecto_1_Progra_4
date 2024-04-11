@@ -29,7 +29,7 @@
     width: 70%;
     overflow-x: hidden;
     overflow-y: auto;
-    max-height: 400px;
+    max-height: 500px;
     color: black;
 
     margin-left: 10px;
@@ -38,8 +38,34 @@
     align-items: center;
     justify-content: center;
     align-content: center;
-    height: 300px;
+    height: 500px;
     background-color: rebeccapurple;
+}
+
+.caption {
+    font-family: "Bradley Hand ITC";
+    font-size: 2em;
+    font-weight: bold;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin: 0 auto;
+}
+
+.searchC{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 10%;
+    margin: 0 auto;
+    padding: 0px;
+}
+
+.arriba{
+    display: flex;
 }
 
 .productos table {

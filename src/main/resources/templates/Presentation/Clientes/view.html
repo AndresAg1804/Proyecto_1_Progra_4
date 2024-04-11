@@ -38,18 +38,35 @@
 </div>
 <br>
 <div class="all">
-    <div class="productos">
-        <div class="ex_para_overflow">
+    <div class="productos" >
+
+        <div class="ex_para_overflow" style="max-height: 100%" >
+
             <table>
+                <tr>
+                    <div class="arriba">
+                        <div class="searchC">
+                            <form  action="/presentation/Clientes/search" th:object="${clienteSearch}" method="post">
+                                <input type="text" th:field="*{nombreC}">
+                                <input type="submit" value="Search">
+                            </form>
+                        </div>
+                    </div>
+
+                </tr>
                 <thead>
+
                 <tr>
                     <th>Identificacion</th>
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Telefono</th>
                     <th> </th>
+
                 </tr>
+
                 </thead>
+
                 <tr th:each="c: ${clientes}">
                     <td>
                         <div th:text="${c.getIdC()}"></div>
@@ -67,28 +84,52 @@
                         <a th:href="@{'/presentation/Clientes/edit?idC=' + ${c.getIdC()}}"><img id="editimg" src="../../../static/Images/edit.png"></a>
                     </td>
                 </tr>
+
             </table>
+
         </div>
+
+
         <div class="forms">
-            <form class="producto-forms" method="post" th:action="@{/Clientes/save}" th:object="${clienteEdit}">
+            <form class="producto-forms" method="post" action="/presentation/Clientes/save" th:object="${clienteEdit}">
                 <div>
                     <h2>Editar</h2>
                 </div>
+                <th:block th:if="${mode==0}">
+                    <div class="form-group">
+                        <label>ID:</label>
+                        <input type="text" th:field="*{idC}">
+                        <div th:if="${#fields.hasErrors('idC')}" th:errors="*{idC}">
+                            Error
+                        </div>
+                    </div>
+                </th:block>
+                <th:block th:unless="${mode==0}">
+                    <div class="form-group">
+                        <label>ID:</label>
+                        <input type="text" th:value="*{idC}" readonly>
+                    </div>
+                </th:block>
                 <div class="form-group">
-                    <label for="idPr">ID:</label>
-                    <input type="text" name="idPr" id="idPr" th:value="${clienteEdit != null ? clienteEdit.getIdPr() : ''}">
+                    <label>Nombre:</label>
+                    <input type="text" th:field="*{nombreC}">
+                    <div th:if="${#fields.hasErrors('nombreC')}" th:errors="*{nombreC}">
+                        Error
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="nombreP">Nombre:</label>
-                    <input type="text" name="nombreP" id="nombreP" th:value="${clienteEdit != null ? clienteEdit.getNombreP() : ''}">
+                    <label>Correo:</label>
+                    <input type="text" th:field="*{correo}">
+                    <div th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}">
+                        Error
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="precio">Precio:</label>
-                    <input type="number" name="precio" id="precio"  required th:value="${clienteEdit != null ? clienteEdit.getPrecio() : ''}">
-                </div>
-                <div class="form-group">
-                    <label for="cant">Cantidad:</label>
-                    <input type="number" name="cant" id="cant" required th:value="${clienteEdit != null ? clienteEdit.getPrecio() : ''}">
+                    <label>Telefono:</label>
+                    <input type="text" th:field="*{telefono}">
+                    <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">
+                        Error
+                    </div>
                 </div>
                 <button type="submit" >Crear Cliente</button>
             </form>
