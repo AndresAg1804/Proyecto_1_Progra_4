@@ -66,6 +66,12 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext7-core</artifactId>
+			<version>7.1.12</version>
+			<type>pom</type>
+		</dependency>
     </dependencies>
 
 	<build>
