@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -45,14 +46,20 @@ public class Service {
         return clienteRepository.findByIdCAndProveedoresByProveedorid(idc,proveedores);
     }
 
-    public void addCliente(String nombreC, String idC, String correo, int telefono, Proveedores proveedor){
-        Clientes c=new Clientes();
-        c.setIdC(idC);
-        c.setNombreC(nombreC);
-        c.setCorreo(correo);
-        c.setTelefono(telefono);
-        c.setProveedoresByProveedorid(proveedor); //Fijarse que sea correcto
+    public void addCliente(Clientes c){
         clienteRepository.save(c);
+    }
+
+    public void clienteEdit(Clientes cliente, Proveedores proveedor){
+        Clientes c=clienteRepository.findByIdCAndProveedoresByProveedorid(cliente.getIdC(),proveedor);
+        c.setNombreC(cliente.getNombreC());
+        c.setCorreo(cliente.getCorreo());
+        c.setTelefono(cliente.getTelefono());
+        clienteRepository.save(c);
+    }
+
+    public List<Clientes> buscarClientesPorNombreYProveedor(String nombre, Proveedores proveedores){
+        return clienteRepository.findClientesByNombreCContainsAndProveedoresByProveedorid(nombre,proveedores);
     }
 
     //Metodos para proveedores

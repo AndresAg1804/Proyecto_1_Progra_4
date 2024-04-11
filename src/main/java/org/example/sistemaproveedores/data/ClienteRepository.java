@@ -16,4 +16,7 @@ public interface ClienteRepository extends CrudRepository<Clientes, String> {
 
     Clientes findByIdCAndProveedoresByProveedorid(String idC, Proveedores proveedores);
 
+    List<Clientes> findClientesByNombreCContainsAndProveedoresByProveedorid(String nombreC, Proveedores proveedores);
+
+
 }
