@@ -54,6 +54,7 @@
                 </tr>
                 <tr> <th>Num Factura</th><th>Cliente</th> <th>Proveedor</th> <th>Monto</th> <th> PDF/XML</th></tr>
                 <tr th:each="u: ${Sfacturas}">
+                    <td />
                     <td th:text="${u.getNumFact()}"/>
                     <td th:text="${u.getClientesByIdCliente().getNombreC()}"/>
                     <td th:text="${u.getProveedoresByIdProveedor().getNombreP()}"/>
