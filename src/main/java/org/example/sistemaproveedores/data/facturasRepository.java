@@ -1,6 +1,7 @@
 package org.example.sistemaproveedores.data;
 
 
+import org.example.sistemaproveedores.logic.Detalle;
 import org.example.sistemaproveedores.logic.Facturas;
 import org.example.sistemaproveedores.logic.Proveedores;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,4 +21,11 @@ public interface facturasRepository extends CrudRepository<Facturas, Integer> {
     @Modifying
     @Query("SELECT f FROM Facturas f WHERE f.proveedoresByIdProveedor.idP = ?1")
     List<Facturas> findAllByProveedorId(String idproveedor);
+
+    Facturas getFacturasByNumFact(int numfact);
+    @Query("SELECT d FROM Detalle d WHERE d.facturasByNumFact.numFact = ?1")
+    Iterable<Detalle> findDetallesByFacturaNumFact(int numFact);
+
+    @Query("SELECT f FROM Facturas f WHERE f.proveedoresByIdProveedor.idP = ?1 AND f.numFact = ?2")
+    List<Facturas> findAllByIdProveedorAndNumFact(String idProveedor, int numFact);
 }

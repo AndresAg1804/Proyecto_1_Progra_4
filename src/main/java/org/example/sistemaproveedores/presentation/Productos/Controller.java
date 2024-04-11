@@ -31,7 +31,15 @@ public class Controller {
         }
         //existe una mejor manera? si
         Usuarios u=(Usuarios) session.getAttribute("usuario");
-        model.addAttribute("productos",service.get_all_productos_de_IDprovedor(u.getProveedoresByIdprov().getIdP()));
+        if(session.getAttribute("productos_BUSQUEDA")!=null){
+            model.addAttribute("productos", session.getAttribute("productos_BUSQUEDA"));
+            session.setAttribute("productos_BUSQUEDA",null);
+        }
+        else {
+            session.setAttribute("productos", service.get_all_productos_de_IDprovedor(u.getProveedoresByIdprov().getIdP()));
+            model.addAttribute("productos", session.getAttribute("productos"));
+        }
+        //model.addAttribute("productos",service.get_all_productos_de_IDprovedor(u.getProveedoresByIdprov().getIdP()));
 
         return "/Presentation/Productos/view";
     }
@@ -72,5 +80,17 @@ public class Controller {
         }
         return "redirect:/presentation/Productos/show";
     }
+    @PostMapping("/productos/buscar")
+    public String buscPro(@RequestParam("idPr") String idPr,Model model, HttpSession session){
+        if(idPr==""){
+
+            return "redirect:/presentation/Productos/show";
+        }
+        Usuarios u=(Usuarios) session.getAttribute("usuario");
+        session.setAttribute("productos_BUSQUEDA", service.findAllByProveedorIdAndProductoId(u.getProveedoresByIdprov().getIdP(),idPr));
+        model.addAttribute("productos_BUSQUEDA", session.getAttribute("productos_BUSQUEDA"));
+        return "redirect:/presentation/Productos/show";
+    }
+
 
 }

@@ -24,5 +24,8 @@ public interface ProductosRepository extends CrudRepository<Producto, String>{
     @Query("update Producto p set p.nombreP = ?1, p.precio = ?2, p.cant = ?3 where p.idPr = ?4")
     void updateProducto(String nombreP, double precio, int cantidad, String idPr);
 
+    @Query("SELECT p FROM Producto p WHERE p.proveedoresByIdProd.idP = ?1 AND p.idPr = ?2")
+    List<Producto> findAllByProveedorIdAndProductoId(String idProveedor, String idProducto);
+
 
 }
