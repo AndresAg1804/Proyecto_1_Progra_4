@@ -56,10 +56,14 @@ form{
     align-items: center;
     font-weight: bolder;
     text-align: center;
+    display:block;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 form div:first-child{
-    margin-top: 30%;
+    margin-top: 10px;
 }
 
 form label{
