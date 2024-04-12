@@ -95,16 +95,16 @@
                     </th:block>
                     <th:block th:unless="${proEDIT != null}">
                         <label for="idPr">ID:</label>
-                        <input type="text" name="idPr" id="idPr" th:value="${proEDIT != null ? proEDIT.getIdPr() : ''}">
+                        <input type="text" name="idPr" id="idPr" required th:value="${proEDIT != null ? proEDIT.getIdPr() : ''}">
                     </th:block>
                 </div>
                 <div class="form-group">
                     <label for="nombreP">Nombre:</label>
-                    <input type="text" name="nombreP" id="nombreP" th:value="${proEDIT != null ? proEDIT.getNombreP() : ''}">
+                    <input type="text" name="nombreP" id="nombreP" required th:value="${proEDIT != null ? proEDIT.getNombreP() : ''}">
                 </div>
                 <div class="form-group">
                     <label for="precio">Precio:</label>
-                    <input type="number" name="precio" id="precio"   th:value="${proEDIT != null ? proEDIT.getPrecio() : ''}">
+                    <input type="number" name="precio" id="precio" required th:value="${proEDIT != null ? proEDIT.getPrecio() : ''}">
                 </div>
                 <div class="form-group">
                     <label for="cant">Cantidad:</label>
