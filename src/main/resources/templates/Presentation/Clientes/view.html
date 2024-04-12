@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:extends="HeadFooter">
 <head>
+    <title>Facturacion</title>
     <meta charset="UTF-8">
-    <title>Clientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../static/css/Menu.css">
     <link rel="stylesheet" href="../../../static/css/styleHeaderFooter.css">
     <link rel="stylesheet" href="../../../static/css/productos.css">
@@ -18,21 +19,22 @@
             <a href="/presentation/AcercaDe/show">Acerca De</a>
         </li>
         <li>
-            <a href="/presentation/Login/show">Login</a>
+            <a href="/presentation/Facturar/show">Facturar</a>
         </li>
         <li>
-            <a href="/presentation/Facturar/show">Prueba</a>
+            <a href="/presentation/Clientes/show">Clientes</a>
         </li>
-
         <li>
-            <a href="">All view's</a>
-            <ul>
-                <li><a href="" title="-">-></a></li>
-                <li><a href="/presentation/Usuarios/show" title="-">Usuarios</a></li>
-                <li><a href="/presentation/Clientes/show" title="-">Clientes</a></li>
-                <li><a href="/presentation/Productos/show" title="-">Productos</a></li>
-                <li><a href="/presentation/Facturas/show" title="-">Facturas</a></li>
-            </ul>
+            <a href="/presentation/Productos/show">Productos</a>
+        </li>
+        <li>
+            <a href="/presentation/Facturas/show">Facturas</a>
+        </li>
+        <li>
+            <a href="/presentation/Usuarios/show">Usuario</a>
+        </li>
+        <li>
+            <a href="/presentation/OUT/OUT">Logout</a>
         </li>
     </ul>
 </div>
