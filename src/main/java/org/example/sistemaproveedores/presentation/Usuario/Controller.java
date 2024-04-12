@@ -29,7 +29,9 @@ public class Controller {
     }
     @GetMapping("/presentation/Usuarios/show")// like mande a otro lado
     public String show(Model model,HttpSession session){// index/menu->show all usuarios
-        model.addAttribute("S_usuarios", service.usuariosFindAll());
+        Usuarios u = (Usuarios) session.getAttribute("usuario");
+        model.addAttribute("usuarios", u);
+
         return "/Presentation/Usuario/view";
     }
     @PostMapping("/Usuarios/newU")//regi y mande a otro lado

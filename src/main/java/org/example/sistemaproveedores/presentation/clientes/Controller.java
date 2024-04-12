@@ -37,6 +37,7 @@ public class Controller {
         Usuarios usuario = (Usuarios) session.getAttribute("usuario");
         Proveedores proveedor = usuario.getProveedoresByIdprov();
         model.addAttribute("clientes", service.clienteFindByProveedor(proveedor.getIdP()));
+        session.setAttribute("mode", 0);
         return "/Presentation/Clientes/view";
     }
 
