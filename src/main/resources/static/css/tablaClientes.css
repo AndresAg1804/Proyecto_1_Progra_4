@@ -1,8 +1,22 @@
-table {
-    border-collapse: collapse;
-    width: 100%;
+div table{
     margin: 0 auto;
     text-align: center;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+}
+
+table {
+    border-collapse: collapse;
+    width: 40%;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
 }
 
 th{
