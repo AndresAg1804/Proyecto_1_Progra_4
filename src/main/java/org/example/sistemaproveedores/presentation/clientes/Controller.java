@@ -64,7 +64,8 @@ public class Controller {
         model.addAttribute("clienteEdit", cliente);
         session.setAttribute("clienteEdit", cliente);
         session.setAttribute("mode", 1);
-        return "redirect:/presentation/Clientes/show";
+        model.addAttribute("mode", 1);
+        return "/Presentation/Clientes/view";
     }
 
     @PostMapping("/presentation/Clientes/save")
@@ -89,6 +90,7 @@ public class Controller {
             session.setAttribute("clienteEdit", new Clientes());
             model.addAttribute("clienteEdit", new Clientes());
             session.setAttribute("mode", 0);
+            model.addAttribute("mode", 0);
         }
         return "redirect:/presentation/Clientes/show";
     }

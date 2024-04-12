@@ -1,6 +1,8 @@
 package org.example.sistemaproveedores.logic;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -25,6 +27,7 @@ public class Clientes {
     private Proveedores proveedoresByProveedorid;
     @OneToMany(mappedBy = "clientesByIdCliente")
     private Collection<Facturas> facturasByIdC;
+
 
     public String getNombreC() {
         return nombreC;
